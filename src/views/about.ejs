@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <div id="about">
+        <div class="title">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="content">
+            <%= About.Description %>
+            <p>
+                <%- About.Note %>
+            </p>
+            <p>
+                <%- About.Author %>
+            </p>
+
+            <h2><%= About.UsedSources %></h2>
+            <p>
+                <ul>
+                    <% for(let i = 0; i < Feeds.length; i++) { %>
+                    <li><a href="<%= Feeds[i] %>" class="item"><%= Feeds[i] %></a></li>
+                    <% } %>    
+                </ul>
+            </p>
+
+            <h2><%= About.FreeComponents %></h2>
+            <p>
+                <ul>
+                    <li><a href="https://plyr.io/">Plyr HTML5 video player</a></li>
+                    <li><a href="https://www.subtlepatterns.com">SubtlePatterns - Background patterns</a></li>
+                    <li><a href="https://www.flaticon.com/">Social network icons</a></li>
+                    <li><a href="https://github.com/PirateTV/ServerApp">Portal application source code</a></li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    
+    <% include partials/footer %>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <div id="listOfShows">
+        <div class="title purpleBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="shows">
+            <div class="content">
+                <% for(let i = 0; i < ShowsList.length; i++) { %>
+                <a href="<%= ShowsList[i].url %>" class="item purpleUnderline">
+                    <img src="<%= ShowsList[i].cover %>" alt="<%= ShowsList[i].title %>" />
+                    <h2><%= ShowsList[i].title %></h2>
+                </a>
+                <% } %>
+                
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>
+</body>
+</html>

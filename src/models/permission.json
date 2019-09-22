@@ -1,0 +1,9 @@
+{
+    "id": "",
+    "type": "permission",
+    "user": "",
+    "admin": false,
+    "canCreateGroups": true,
+    "canCreateActRooms": true,
+    "canManageUsers": true
+}

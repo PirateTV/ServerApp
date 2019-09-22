@@ -1,0 +1,22 @@
+{
+  "name": "ejednani-server",
+  "description": "Systém pro elektronické vedení jednání",
+  "main": "server.js",
+  "authors": [
+    "Ondřej Kotas"
+  ],
+  "license": "SEE LICENSE IN ../LICENSE",
+  "homepage": "https://github.com/ejednani-cz/ejednani-server",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "js-cookie": "^2.2.0",
+    "selectize": "^0.12.6"
+  }
+}

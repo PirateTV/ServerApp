@@ -1,0 +1,563 @@
+:root {
+    --blue: #0097D2;
+    --red: rgb(158, 0, 0);
+    --purple: rgb(77, 46, 150);
+    --green: rgb(0, 139, 70);
+    --darkBlue: rgb(0, 63, 88);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #efefef;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#links {
+    height: 24px;
+}
+
+#links span {
+    font-size: 9pt;
+    vertical-align: middle;
+    display: inline-block;
+    height: 24px;
+    margin: 0 1em 0 0;
+    background: #666666;
+}
+
+#links span a {
+    text-decoration: none;
+    
+}
+
+#links #ppcz {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    background: url('/images/social/ppcz_logo_black.png') no-repeat;
+    background-size: contain;
+    margin-top: -2px;
+}
+
+#links #ppcz:hover {
+    background: url('/images/social/ppcz_logo_white.png') no-repeat;
+    background-size: contain;
+}
+
+#header {
+    background: #ffffff;
+    padding: 1em 0 1em 0;
+}
+
+#bottomlinks {
+    padding: 2em 0 2em 0;
+    font-size: 10pt;
+    background: url("/images/black_denim/black_denim.png") repeat;
+    color: #ffffff;
+}
+
+#footer {
+    padding: 2em 0 2em 0;
+    font-size: 10pt;
+    background: url("/images/denim/denim.png") repeat;
+    color: #ffffff;
+}
+
+div.content {
+    margin: auto 10em auto 10em;
+    position: relative;
+}
+
+div.rightCol {
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+}
+
+#header div.rightCol {
+    line-height: 36px;
+}
+
+#header div.rightCol a:link, #header div.rightCol a:visited {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    color: #000000;
+    font-size: 10.5pt;
+    margin: auto auto auto 2em;
+}
+
+#header div.rightCol a:hover {
+    border-bottom: solid 2px #dddddd;
+}
+
+#header div.rightCol a.linkShows:hover {
+    border-bottom: solid 2px var(--blue);
+}
+
+#header div.rightCol a.linkStreams:hover {
+    border-bottom: solid 2px var(--red);
+}
+
+#header div.rightCol a.linkMovies:hover {
+    border-bottom: solid 2px var(--purple);
+}
+
+#header div.rightCol a.linkWeather:hover {
+    border-bottom: solid 2px var(--green);
+}
+
+#listOfShows .title {
+    padding: 1em 0 1em 0;
+    color: #ffffff;
+}
+
+#listOfShows .sorting {
+    padding: 1em 0 1em 0;
+    background: #cccccc;
+}
+
+#listOfShows .sorting h1 {
+    font-weight: 600;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+    font-size: 16pt;
+}
+
+#listOfShows .sorting div div:nth-of-type(2) {
+    margin: 1em 0 0.5em 0;
+}
+
+#listOfShows .sorting a.letter:link, #listOfShows .sorting a.letter:visited, #listOfShows .shows a.letter:link, #listOfShows .shows a.letter:visited {
+    color: #000000;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 0.5em 0 0.5em;
+}
+
+#listOfShows .sorting a.letter:hover, #listOfShows .shows a.letter:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
+
+#listOfShows .sorting a.selected:link, #listOfShows .sorting a.selected:visited {
+    text-decoration: none;
+    color: var(--blue);
+    cursor: default;
+}
+
+#listOfShows .sorting span.letter, #listOfShows .shows span.letter {
+    text-decoration: none;
+    color: #999999;
+    display: inline-block;
+    margin: 0 0.5em 0 0.5em;
+}
+
+#listOfShows .shows {
+    padding: 1em 0 1em 0;
+    text-align: center;
+}
+
+#listOfShows .shows .item {
+    display: inline-block;
+
+    width: 290px;
+    
+    margin: 0.5em;
+
+    border-bottom: solid 2px #dddddd;
+    
+    text-decoration: none;
+    color: #000000;
+    background: #ffffff;
+
+    vertical-align: top;
+    text-align: left;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; 
+}
+
+#listOfShows .shows .item:hover {
+    border-bottom: solid 2px var(--blue);
+}
+
+#listOfShows .shows .purpleUnderline:hover {
+    border-bottom: solid 2px var(--purple);
+}
+
+#listOfShows .shows .redUnderline:hover {
+    border-bottom: solid 2px var(--red);
+}
+
+
+#listOfShows .shows .item img {
+    width: 290px;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; 
+}
+
+#listOfShows .shows .item h2 {
+    margin: 0.5em 1em 0.5em 1em;
+    padding: 0;
+    font-weight: 600;
+    font-size: 13pt;
+    height: 50px;
+}
+
+#listOfShows .shows .item .license {
+    display: block;
+    margin: 0 1em 0.5em 1.5em;
+    font-size: 8.5pt;
+}
+
+#listOfShows .shows .item .license img {
+    width: 16px;
+    vertical-align: middle;
+}
+
+#listOfShows .shows .item p {
+    font-size: 10pt;
+    white-space: pre-wrap;
+    padding: 0.5em 1em 0 1em;
+}
+
+#listOfShows .detail .item {
+    width: 500px;
+}
+
+#listOfShows .detail .item img {
+    width: 500px;
+}
+
+#listOfShows .detail .item span.published {
+    font-size: 9pt;
+    color: #999999;
+    padding: 0 1em 0.5em 1em;
+    display: block;
+    text-align: right;
+}
+
+#weather .title {
+    padding: 1em 0 1em 0;
+    color: #ffffff;
+}
+
+#weather .weatherFrame {
+    max-height: 800px;
+}
+
+#weather iframe {
+    width: 100%;
+    border: none;
+    height: 800px
+}
+
+#about {
+    margin: 0 0 1em 0;
+}
+
+#bottomlinks {
+    color: #999999;
+}
+
+#bottomlinks ul li {
+    list-style-type: none;
+    line-height: 2em;
+}
+
+#bottomlinks a:link, #bottomlinks a:visited {
+    color: #999999;
+    text-decoration: none;
+}
+
+#footer {
+    text-align: right;
+}
+
+#footer a:link, #footer a:visited {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+#footer a:hover, #bottomlinks a:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
+
+#about .title {
+    padding: 1em 0 1em 0;
+}
+
+#img404 {
+    width: 600px;
+}
+
+#topics .title {
+    padding: 1em 0 1em 0;
+    color: #ffffff;
+    background: #999999;
+}
+
+#topics .title h1 a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#topics .title h1 a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+#topics .topicsContent .content {
+    text-align: center;
+    margin: 2em auto 2em auto;
+}
+
+#topics .item {
+    width: 600px;
+    display: inline-block;
+    vertical-align: text-top;
+    text-align: left;
+    margin: 0.5em;
+    background: #ffffff;
+    border-bottom: solid 2px #dddddd;
+    position: relative;
+}
+
+#topics .item h1 {
+    font-size: 12pt;
+    background: #999999;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0;
+    color: #ffffff;
+}
+
+#topics .item p {
+    font-size: 11pt;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0;
+    color: #000000;
+}
+
+#topics .item span {
+    color: #999999;
+    font-size: 9pt;
+    margin: 0 1em 0.5em 1em;
+    display: inline-block;
+}
+
+#topics .item span.right {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+
+#topics .item:hover {
+    border-bottom: solid 2px var(--blue);
+}
+
+#topics .item:hover h1 {
+    background: var(--blue);
+}
+
+#about .content h2 {
+    font-size: 14pt;
+    font-weight: 600;
+    margin: 2em auto 1em auto;
+}
+
+#about .content p {
+    font-size: 11pt;
+}
+
+#about .content ul:nth-of-type(2) {
+    margin-bottom: 2em;
+}
+
+#about .content li {
+    font-size: 11pt;
+    color: #666666;
+}
+
+#about .content a:link, #about .content a:visited {
+    color: #666666;
+}
+
+#about .content a:hover {
+    color: var(--blue);
+}
+
+.copyleft {
+    display:inline-block;
+    transform: rotate(180deg);
+    vertical-align: middle;
+}
+
+.blueBg {
+    background: var(--blue);
+}
+
+.greenBg {
+    background: var(--green);
+}
+
+.purpleBg {
+    background: var(--purple);
+}
+
+.redBg {
+    background: var(--red);
+}
+
+.title h1 {
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile {
+    display: none;
+}
+
+.center {
+    text-align: center;
+}
+
+#facebook, #youtube {
+    width: 32px;
+    height: 32px;
+    display:inline-block;
+    margin: 0.5em 0 0 0.5em;
+}
+
+#facebook div {
+    width: 32px;
+    height: 32px;
+    background: url('/images/social/facebook_white.png');
+}
+
+#facebook:hover div {
+    width: 32px;
+    height: 32px;
+    background: url('/images/social/facebook.png');
+}
+
+#youtube div {
+    width: 32px;
+    height: 32px;
+    background: url('/images/social/youtube_white.png');
+}
+
+#youtube:hover div {
+    width: 32px;
+    height: 32px;
+    background: url('/images/social/youtube.png');
+}
+
+#header div.mobile {
+    display: none;
+}
+
+#playerContainer {
+    display: none;
+}
+
+@media all and (max-width: 1600px) {
+    div.content {
+        margin: auto 6em auto 6em;
+        position: relative;
+    }
+}
+
+@media all and (max-width: 1200px) {
+    div.content {
+        margin: auto 2em auto 2em;
+    }
+}
+
+@media all and (max-width: 900px) {
+    .linkWeather, .linkMovies {
+        display: none !important;
+    }
+}
+
+@media all and (max-width: 680px) {
+    #listOfShows .shows .item {
+        display: block;
+        margin: 1em auto 1em auto;
+    }
+
+    #menu {
+        position: absolute;
+        top: 50px;
+        left: -2em;
+        width: 100%;
+        background: #ffffff;
+        z-index: 8000;
+        padding: 0.5em 2em 0.5em 2em;
+        display: none;
+    }
+
+    #mobileMenuUnder {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 7000;
+        display: none;
+    }
+
+    #header div.mobile, #header div.rightCol a {
+        display: block !important;
+    }
+    
+    #img404 {
+        width: 400px;
+    }
+
+    #topics .item {
+        width: auto;
+        margin: 0.5em 1em 0.5em 1em;
+    }
+
+    #listOfShows .detail .item, #listOfShows .detail .item img {
+        max-width: 360px;
+    }
+}
+
+@media all and (max-width: 400px) {
+    #bottomlinks .rightCol {
+        display: none;
+    }
+
+    h1 {
+        font-size: 16pt;
+    }
+    
+    #img404 {
+        width: 250px;
+    }
+
+    #listOfShows .shows .item, #listOfShows .shows .item img {
+        max-width: 220px;
+    }
+
+    #listOfShows .shows .item h2 {
+        height: auto;
+    }
+}

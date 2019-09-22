@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <div id="listOfShows">
+        <div class="title blueBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="sorting blueBg">
+            <div class="content">
+                <div>
+                    <% if(SelectedGenre == "all"){ %>
+                    <a href="/porady" class="letter selected"><%= AllGenres %></a>
+                    <% } else{ %>
+                    <a href="/porady" class="letter"><%= AllGenres %></a>
+                    <% } %>
+                    <% for(let j = 0; j < Genres.length; j++) { %>
+                        <% if(SelectedGenre == Genres[j]){ %>
+                        <a href="/porady/<%= Genres[j] %>" class="letter selected"><%= Genres[j] %></a>
+                        <% } else{ %>
+                        <a href="/porady/<%= Genres[j] %>" class="letter"><%= Genres[j] %></a>
+                        <% } %>
+                    <% } %>
+                </div>
+
+                <div>
+                    <% for(let j = 0; j < Letters.length; j++) { %>
+                        <% if(AlphaTitles(Letters[j]).length > 0){ %>
+                            <a href="#<%= Letters[j] %>" class="letter"><%= Letters[j] %></a>
+                        <% } else{ %>
+                            <span class="letter"><%= Letters[j] %></span>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="shows">
+            <div class="content">
+                <% for(let j = 0; j < Letters.length; j++) { %>
+                    <% if(AlphaTitles(Letters[j]).length > 0){ %>
+                    <h1 id="<%= Letters[j] %>"><%= Letters[j] %></h1>
+                    <% } %>
+                        <% for(let i = 0; i < AlphaTitles(Letters[j]).length; i++) { %>
+                        <a href="/porad/<%= AlphaTitles(Letters[j])[i].title %>" class="item">
+                            <img src="<%= AlphaTitles(Letters[j])[i].cover %>" alt="<%= AlphaTitles(Letters[j])[i].title %>" />
+                            <h2><%= AlphaTitles(Letters[j])[i].title %></h2>
+                        </a>
+                        <% } %>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>
+</body>
+</html>

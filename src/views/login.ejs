@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <!-- Page content START -->
+    <div id="loginContainer">
+        <img src="/images/logotyp.svg" alt="eJednani.cz" id="loginLogo" />
+        <div>
+            <form method="POST" action="/auth">
+                <input type="hidden" name="urlToRedirect" value="<%= currentUrl %>" />
+                
+                <div class="field">
+                    <%= email %><br />
+                    <input type="text" name="email" />
+                </div>
+                <div class="field">
+                    <%= password %><br />
+                    <input type="password" name="password" />
+                </div>
+                <div class="field">
+                    <input type="submit" value="<%= submit %>" />
+                    <!--
+                        <br />
+                        <br />
+                        <a href="#"><%= lostpassword %></a>
+                    -->
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Page content END -->
+
+    <% include partials/footer %>
+</body>
+</html>

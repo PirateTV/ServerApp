@@ -1,0 +1,19 @@
+{
+    "global": {
+        "users": {
+            "allowProfileEdit": true,
+            "allowGroupJoin": true
+        },
+        "portal": {
+            "allowPublicAccess": false,
+            "allowCreateGroups": true,
+            "allowCreateActRooms": true,
+            "maintenanceMode": false
+        },
+        "customer": {
+            "name": "",
+            "color": "",
+            "logoLocation": ""
+        }
+    }
+}

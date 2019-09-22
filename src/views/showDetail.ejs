@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <!-- Page content START -->
+    <div id="listOfShows">
+        <div class="title blueBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div id="playerContainer">
+            <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
+        </div>
+
+        <div class="shows detail">
+            <div class="content">
+
+                <% for(let i = 0; i < Rss.length; i++) { %>
+                    <% if(i==0) { %>
+                        <script type="text/javascript">
+                            showPlyrYT('<%= Rss[i].link[0].ATTR.href %>');
+                        </script>
+                    <% } %>
+
+                    <a href="#" onclick="javascript: showPlyrYT('<%= Rss[i].link[0].ATTR.href %>');" class="item">
+                        <img src="<%= GetThumb(Rss[i]) %>" alt="<%= Rss[i].title %>" />
+                        <h2><%= Rss[i].title %></h2>
+                        <p><%- GetDescription(Rss[i]) -%></p>
+                        <span class="published"><%= FormatDateTimeToCZ(Rss[i].published) %></span>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    <!-- Page content END -->
+
+    <% include partials/footer %>
+</body>
+</html>

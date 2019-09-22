@@ -1,0 +1,35 @@
+<!--<div id="links">
+    <div class="content">
+        <span>
+            <a href="https://www.pirati.cz/" id="ppcz"></a>
+        </span>
+        <span>
+            <a href="https://www.piratskelisty.cz/">Pirátské listy</a>
+        </span>
+        <span>
+            <a href="https://www.piratskatelevize.cz/">Pirátská televize</a>
+        </span>
+        <span>
+            <a href="https://forum.pirati.cz/">Pirátské fórum</a>
+        </span>
+    </div>
+</div>-->
+
+<div id="header">
+    <div class="content">
+        <a href="/"><img src="/images/logo.png" id="logo" alt="logo Pirátské televize" /></a>
+
+        <div class="rightCol" id="menu">
+            <a href="/porady" class="linkShows"><%= Menu.Shows %></a>
+            <a href="/zive" class="linkStreams"><%= Menu.LiveStreams %></a>
+            <a href="/filmy" class="linkMovies"><%= Menu.Movies %></a>
+            <a href="/pocasi" class="linkWeather"><%= Menu.Weather %></a>
+            <a href="/o-nas"><%= Menu.About %></a>
+        </div>
+        <div class="rightCol mobile" onclick="javascript: hideShow('menu'); hideShow('mobileMenuUnder');">
+            <a href="#">☰</a>
+        </div>
+    </div>
+</div>
+
+<div id="mobileMenuUnder" onclick="javascript: hideShow('menu'); hideShow('mobileMenuUnder');"></div>
