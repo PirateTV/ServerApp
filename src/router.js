@@ -68,7 +68,7 @@ router.get("/porad/:showTitle", function(req, res) {
     db.rdb.table("shows").filter({"category":"show", "title" : req.params.showTitle}).orderBy("title").run().then(function(shows) {
         var views = 1;
         if(shows[0].views != null) {
-            views = views + shows[0].views;
+            views = shows[0].views + 1;
         }
         db.rdb.table("shows").filter({"category":"show", "title" : req.params.showTitle}).update({"views": views}).run();
 
