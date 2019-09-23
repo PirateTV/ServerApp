@@ -17,7 +17,7 @@
 
         <div id="playerContainer">
             <% if(ShowDetails.youtube == null || ShowDetails.youtube == "") { %>
-                <video src="<%= ShowDetails.video %>" poster="<%= ShowDetails.cover %>" id="player" playsinline controls></video>
+                <video src="<%= ShowDetails.video %>" id="player" playsinline controls></video>
             <% } else { %>
                 <div id="player" data-plyr-provider="youtube" data-plyr-embed-id=""></div>
             <% } %>
