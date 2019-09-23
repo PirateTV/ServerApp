@@ -14,20 +14,24 @@ router.get("/", function(req, res) {
     db.rdb.table("shows").filter({"category":"show"}).orderBy(db.rdb.desc("views")).run().then(function(shows) {
         // Load topics from news
         Feed.load('https://www.piratskelisty.cz/rss/', function(err, rss) {
-            res.render("home", {
-                SubpageTitle: i18n.__('Home'),
-                RssTopics: rss.items.sort(function(a, b) {
-                    // Turn your strings into dates, and then subtract them
-                    // to get a value that is either negative, positive, or zero.
-                    return new Date(b.pubDate) - new Date(a.pubDate);
-                }).slice(0,6),
-                FormatDateTimeToCZ: function(str) {
-                    return formatDateTimeToCZ(str);
-                },
-                MostWatchedShows: shows.slice(0,4),
-                SanitizeStringToUrl: function(str) {
-                    return sanitizeStringToUrl(str);
-                }
+            Feed.load('https://www.piratskelisty.cz/rss/aktuality', function(err, rss1) {
+                var mergedTopics = rss.items.concat(rss1.items);
+
+                res.render("home", {
+                    SubpageTitle: i18n.__('Home'),
+                    RssTopics: mergedTopics.sort(function(a, b) {
+                        // Turn your strings into dates, and then subtract them
+                        // to get a value that is either negative, positive, or zero.
+                        return new Date(b.pubDate) - new Date(a.pubDate);
+                    }).slice(0,6),
+                    FormatDateTimeToCZ: function(str) {
+                        return formatDateTimeToCZ(str);
+                    },
+                    MostWatchedShows: shows.slice(0,4),
+                    SanitizeStringToUrl: function(str) {
+                        return sanitizeStringToUrl(str);
+                    }
+                });
             });
         });
     });
