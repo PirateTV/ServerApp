@@ -21,6 +21,6 @@
 	"FreeComponents": "Svobodné součásti portálu",
 	"UsedSources": "Využívané externí zdroje",
 	"PortalDescription": "Pirátská televize je projekt nezávislý na České pirátské straně.",
-	"Note": "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.<br />Zároveň také ke sdružování sdílených živých přenosů zasedání i ke sdílení jiných svobodných děl.",
-	"Author": "Autorem projektu je <a href=\"http://ondrejkotas.cz\">Ondřej Kotas</a>. Dílo je zveřejněno pod licencí <a href=\"https://github.com/PirateTV/ServerApp/blob/master/LICENSE.md\">GNU General Public License v3.0</a>."
+	"Note": "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.<br />Zároveň je také využíván ke sdílených živých přenosů zasedání nebo jiných svobodných děl.",
+	"Author": "Autorem projektu je <a href=\"http://ondrejkotas.cz\">Ondřej Kotas</a>.<br />Dílo je zveřejněno pod licencí <a href=\"https://github.com/PirateTV/ServerApp/blob/master/LICENSE.md\">GNU General Public License v3.0</a>."
 }
