@@ -10,7 +10,9 @@ var getThumb = require('video-thumbnail-url');
 
 // Dynamic endpoints
 router.get("/", function(req, res) {
+    // Load most viewed shows
     db.rdb.table("shows").filter({"category":"show"}).orderBy(db.rdb.desc("views")).run().then(function(shows) {
+        // Load topics from news
         Feed.load('https://www.piratskelisty.cz/rss/', function(err, rss) {
             res.render("home", {
                 SubpageTitle: i18n.__('Home'),
@@ -30,6 +32,7 @@ router.get("/", function(req, res) {
 
 router.get("/porady", function(req, res) {
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
+        // Get list of all genres from db (should be optimalized on side of JS from previous db request)
         db.rdb.table("shows").filter({"category":"show"}).orderBy("genre").getField("genre").distinct().run().then(function(genres) {
             res.render("shows", {
                 SubpageTitle: i18n.__('Shows'),
@@ -46,8 +49,10 @@ router.get("/porady", function(req, res) {
     });
 });
 
+// Filter view on selected genre
 router.get("/porady/:genre", function(req, res) {
     db.rdb.table("shows").filter({"category":"show", "genre" : req.params.genre}).orderBy("title").run().then(function(shows) {
+        // Get list of all genres from db (should be optimalized on side of JS from previous db request)
         db.rdb.table("shows").filter({"category":"show"}).orderBy("genre").getField("genre").distinct().run().then(function(genres) {
             res.render("shows", {
                 SubpageTitle: i18n.__('Shows'),
@@ -66,14 +71,17 @@ router.get("/porady/:genre", function(req, res) {
 
 router.get("/porad/:showTitle", function(req, res) {  
     db.rdb.table("shows").filter({"category":"show", "title" : req.params.showTitle}).orderBy("title").run().then(function(shows) {
+        // Update "views" counter by adding 1
         var views = 1;
         if(shows[0].views != null) {
             views = shows[0].views + 1;
         }
         db.rdb.table("shows").filter({"category":"show", "title" : req.params.showTitle}).update({"views": views}).run();
 
+        // Get YouTube feed link
         var feed = getYoutubeFeed(shows[0].youtube);
 
+        // Get YouTube XML and parse it to JSON
         var body = new EventEmitter();
         request(feed, function(error, response, data) {
             parser.parseString(data, function(error, result) {
@@ -82,6 +90,7 @@ router.get("/porad/:showTitle", function(req, res) {
             });
         });
 
+        // Feed request is async, so when emitter is updated, render the page
         body.on('update', function () {
             res.render("showDetail", {
                 SubpageTitle: shows[0].title,
