@@ -229,6 +229,7 @@ div.rightCol {
 }
 
 #listOfShows .detail .item h2 {
+    min-height: 50px;
     height: auto;
 }
 
@@ -525,8 +526,9 @@ div.rightCol {
     #listOfShows .shows .item, #listOfShows .shows .item img {
         width: 360px;
     }
-    
+
     #listOfShows .shows .item h2 {
+        min-height: 50px;
         height: auto;
     }
 
