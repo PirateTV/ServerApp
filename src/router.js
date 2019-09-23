@@ -175,7 +175,7 @@ router.get("/pocasi", function(req, res) {
 
 router.get("/o-nas", function(req, res) {
     db.rdb.table("shows").filter({"category":"show"}).run().then(function(shows) {
-        var feeds = ["https://www.piratskelisty.cz/rss/"];
+        var feeds = ["https://www.piratskelisty.cz/rss/", "https://www.piratskelisty.cz/rss/aktuality"];
         for(var i=0; i<shows.length; i++) {
             feeds.push(getYoutubeFeed(shows[i].youtube));
         }
