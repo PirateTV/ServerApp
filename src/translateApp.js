@@ -34,6 +34,7 @@ module.exports.translateApplication = function translateApplication(app) {
             Description: i18n.__('PortalDescription'),
             Note: i18n.__('Note'),
             Author: i18n.__('Author')
-        }
+        },
+        ReadMore: i18n.__('ReadMore')
     });
 }

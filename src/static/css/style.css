@@ -436,6 +436,11 @@ div.rightCol {
     text-align: center;
 }
 
+.readMore {
+    font-style: italic;
+    font-size: 10pt !important;
+}
+
 #facebook, #youtube {
     width: 32px;
     height: 32px;
