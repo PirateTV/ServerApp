@@ -228,12 +228,8 @@ div.rightCol {
     vertical-align: middle;
 }
 
-#listOfShows .detail .item {
-    width: 500px;
-}
-
-#listOfShows .detail .item img {
-    width: 500px;
+#listOfShows .detail .item h2 {
+    height: auto;
 }
 
 #showDescription {
@@ -526,6 +522,14 @@ div.rightCol {
         margin: 1em auto 1em auto;
     }
 
+    #listOfShows .shows .item, #listOfShows .shows .item img {
+        width: 360px;
+    }
+    
+    #listOfShows .shows .item h2 {
+        height: auto;
+    }
+
     #menu {
         position: absolute;
         top: 50px;
@@ -560,10 +564,6 @@ div.rightCol {
         width: auto;
         margin: 0.5em 1em 0.5em 1em;
     }
-
-    #listOfShows .detail .item, #listOfShows .detail .item img {
-        max-width: 360px;
-    }
 }
 
 @media all and (max-width: 400px) {
@@ -581,9 +581,5 @@ div.rightCol {
 
     #listOfShows .shows .item, #listOfShows .shows .item img {
         max-width: 220px;
-    }
-
-    #listOfShows .shows .item h2 {
-        height: auto;
     }
 }
