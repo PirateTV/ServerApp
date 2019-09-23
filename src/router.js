@@ -73,7 +73,10 @@ router.get("/porady/:genre", function(req, res) {
                     });
                 },
                 Genres: genres,
-                SelectedGenre: req.params.genre
+                SelectedGenre: req.params.genre,
+                SanitizeStringToUrl: function(str) {
+                    return sanitizeStringToUrl(str);
+                }
             });
         });
     });
