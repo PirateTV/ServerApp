@@ -1,32 +1,32 @@
-Serverová aplikace pro Pirátskou televizi
+ServerovÃ¡ aplikace pro PirÃ¡tskou televizi
 =========================================
-NodeJS aplikace, která spouští portál pro Pirátskou televizi.
+NodeJS aplikace, kterÃ¡ spouÅ¡tÃ­ portÃ¡l pro PirÃ¡tskou televizi.
 
-Tento portál nyní umoòuje agregovat YouTube kanály a playlisty pod tzv. poøady pomocí YouTube RSS.
-Portál udruje databázi poøadù s pøímım odkazem na YouTube kanál/playlist, lokální kopií úvodního obrázku a dalších nezbytnıch informací.
+Tento portÃ¡l nynÃ­ umoÅ¾Åˆuje agregovat YouTube kanÃ¡ly a playlisty pod tzv. poÅ™ady pomocÃ­ YouTube RSS.
+PortÃ¡l udrÅ¾uje databÃ¡zi poÅ™adÅ¯ s pÅ™Ã­mÃ½m odkazem na YouTube kanÃ¡l/playlist, lokÃ¡lnÃ­ kopiÃ­ ÃºvodnÃ­ho obrÃ¡zku a dalÅ¡Ã­ch nezbytnÃ½ch informacÃ­.
 
-Vìtšina vìcí je momentálnì "hardcoded" pøímo ve zdrojovém kódu, jeliko je aplikace šitá na míru na jedno konkrétní pouití a není ambice z ní dìlat redakèní systém.
+VÄ›tÅ¡ina vÄ›cÃ­ je momentÃ¡lnÄ› "hardcoded" pÅ™Ã­mo ve zdrojovÃ©m kÃ³du, jelikoÅ¾ je aplikace Å¡itÃ¡ na mÃ­ru na jedno konkrÃ©tnÃ­ pouÅ¾itÃ­ a nenÃ­ ambice z nÃ­ dÄ›lat redakÄnÃ­ systÃ©m.
 
-## Pouité technologie
+## PouÅ¾itÃ© technologie
 - NodeJS
 - Vue.js
 - RethinkDB https://rethinkdb.com/
-- Moduly NodeJS uvedené v package.json
-- Grafické soubory z https://www.flaticon.com/, https://www.subtlepatterns.com/
-- Videopøehrávaè Plyr https://plyr.io/
+- Moduly NodeJS uvedenÃ© v package.json
+- GrafickÃ© soubory z https://www.flaticon.com/, https://www.subtlepatterns.com/
+- VideopÅ™ehrÃ¡vaÄ Plyr https://plyr.io/
 
 ## Instalace
-- Nainstalujte a spuste si RethinkDB https://rethinkdb.com/docs/install/
-- Vytvoøte v RethinkDB databázi `piratskatelevize` a v ní tabulku `shows`
-- Naklonujte si tento repozitáø.
-- Pomocí pøíkazu `npm install` nainstalujte veškeré závislosti.
-- Aplikace pouívá bower, nicménì všechny kompatibilní komponenty jsou pøiloeny v repozitáøi
-- Pøejdìte do adresáøe `src` a poté mùete aplikaci spustit pomocí pøíkazu `node ./server.js`
+- Nainstalujte a spustÅ¥e si RethinkDB https://rethinkdb.com/docs/install/
+- VytvoÅ™te v RethinkDB databÃ¡zi `piratskatelevize` a v nÃ­ tabulku `shows`
+- Naklonujte si tento repozitÃ¡Å™.
+- PomocÃ­ pÅ™Ã­kazu `npm install` nainstalujte veÅ¡kerÃ© zÃ¡vislosti.
+- Aplikace pouÅ¾Ã­vÃ¡ bower, nicmÃ©nÄ› vÅ¡echny kompatibilnÃ­ komponenty jsou pÅ™iloÅ¾eny v repozitÃ¡Å™i
+- PÅ™ejdÄ›te do adresÃ¡Å™e `src` a potÃ© mÅ¯Å¾ete aplikaci spustit pomocÃ­ pÅ™Ã­kazu `node ./server.js`
 
 ## Dummy data
-Momentálnì nejsou k dispozici.
+MomentÃ¡lnÄ› nejsou k dispozici.
 
 ### Autor
-Ondøej Kotas http://krtkovo.eu/, http://ondrejkotas.cz/
-Licence: GNU GPL v3
+OndÅ™ej Kotas http://krtkovo.eu/, http://ondrejkotas.cz/      
+Licence: GNU GPL v3    
 2019
