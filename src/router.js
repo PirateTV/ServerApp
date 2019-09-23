@@ -165,11 +165,11 @@ function getYoutubeFeed(youtubeUrl) {
 
     if(isChannel) {
         var youtubeId = youtubeUrl.substr(youtubeUrl.indexOf("channel/") + 8).replace("/videos", "");
-        feed = "http://www.youtube.com/feeds/videos.xml?channel_id=" + youtubeId;
+        feed = "https://www.youtube.com/feeds/videos.xml?channel_id=" + youtubeId;
     }
     else {
         var youtubeId = youtubeUrl.substr(youtubeUrl.indexOf("playlist?list=") + 14);
-        feed = "http://www.youtube.com/feeds/videos.xml?playlist_id=" + youtubeId;
+        feed = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + youtubeId;
     }
 
     return feed;
