@@ -17,7 +17,7 @@
         <div class="shows">
             <div class="content">
                 <% for(let i = 0; i < MostWatchedShows.length; i++) { %>
-                <a href="/porad/<%= MostWatchedShows[i].title %>" class="item">
+                <a href="/porad/<%= SanitizeStringToUrl(MostWatchedShows[i].title) %>" class="item">
                     <img src="<%= MostWatchedShows[i].cover %>" alt="<%= MostWatchedShows[i].title %>" />
                     <h2><%= MostWatchedShows[i].title %></h2>
                 </a>

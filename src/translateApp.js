@@ -35,6 +35,8 @@ module.exports.translateApplication = function translateApplication(app) {
             Note: i18n.__('Note'),
             Author: i18n.__('Author')
         },
-        ReadMore: i18n.__('ReadMore')
+        ReadMore: i18n.__('ReadMore'),
+        SourceLink: i18n.__('SourceLink'),
+        Published: i18n.__('Published')
     });
 }

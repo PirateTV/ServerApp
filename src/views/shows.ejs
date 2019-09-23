@@ -50,7 +50,7 @@
                     <h1 id="<%= Letters[j] %>"><%= Letters[j] %></h1>
                     <% } %>
                         <% for(let i = 0; i < AlphaTitles(Letters[j]).length; i++) { %>
-                        <a href="/porad/<%= AlphaTitles(Letters[j])[i].title %>" class="item">
+                        <a href="/porad/<%= SanitizeStringToUrl(AlphaTitles(Letters[j])[i].title) %>" class="item">
                             <img src="<%= AlphaTitles(Letters[j])[i].cover %>" alt="<%= AlphaTitles(Letters[j])[i].title %>" />
                             <h2><%= AlphaTitles(Letters[j])[i].title %></h2>
                         </a>

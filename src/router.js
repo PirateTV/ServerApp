@@ -24,7 +24,10 @@ router.get("/", function(req, res) {
                 FormatDateTimeToCZ: function(str) {
                     return formatDateTimeToCZ(str);
                 },
-                MostWatchedShows: shows.slice(0,4)
+                MostWatchedShows: shows.slice(0,4),
+                SanitizeStringToUrl: function(str) {
+                    return sanitizeStringToUrl(str);
+                }
             });
         });
     });
@@ -43,7 +46,10 @@ router.get("/porady", function(req, res) {
                     });
                 },
                 Genres: genres,
-                SelectedGenre: "all"
+                SelectedGenre: "all",
+                SanitizeStringToUrl: function(str) {
+                    return sanitizeStringToUrl(str);
+                }
             });
         });
     });
@@ -69,17 +75,24 @@ router.get("/porady/:genre", function(req, res) {
     });
 });
 
-router.get("/porad/:showTitle", function(req, res) {  
-    db.rdb.table("shows").filter({"category":"show", "title" : req.params.showTitle}).orderBy("title").run().then(function(shows) {
+router.get("/porad/:showTitle", function(req, res) {
+    res.redirect("/porad/" + req.params.showTitle + "/nejnovejsi");
+});
+
+router.get("/porad/:showTitle/:showEpisode", function(req, res) {  
+    db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
+        show = shows.find(function(elem) {
+            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showTitle);
+        })
         // Update "views" counter by adding 1
         var views = 1;
-        if(shows[0].views != null) {
-            views = shows[0].views + 1;
+        if(show.views != null) {
+            views = show.views + 1;
         }
-        db.rdb.table("shows").filter({"category":"show", "title" : req.params.showTitle}).update({"views": views}).run();
+        db.rdb.table("shows").get(show.id).update({"views": views}).run();
 
         // Get YouTube feed link
-        var feed = getYoutubeFeed(shows[0].youtube);
+        var feed = getYoutubeFeed(show.youtube);
 
         // Get YouTube XML and parse it to JSON
         var body = new EventEmitter();
@@ -92,23 +105,52 @@ router.get("/porad/:showTitle", function(req, res) {
 
         // Feed request is async, so when emitter is updated, render the page
         body.on('update', function () {
-            res.render("showDetail", {
-                SubpageTitle: shows[0].title,
-                ShowDetails: shows[0],
-                Rss: body.data.feed.entry,
-                GetThumb: function(item) {
-                    return item['media:group'][0]['media:thumbnail'][0].ATTR.url;
-                },
-                GetDescription: function(item) {
-                    return item['media:group'][0]['media:description'][0];
-                },
-                FormatDateTimeToCZ: function(str) {
-                    return formatDateTimeToCZ(str);
+            // Find if episode is specified. If not, return latest episode.
+            var x = function() {
+                if(req.params.showEpisode == null || req.params.showEpisode == "" || req.params.showEpisode == "nejnovejsi") {
+                    return body.data.feed.entry[0];
                 }
-            });
-        });
+                // If yes, check if it exists. If yes, return it. If not return -1.
+                else {
+                    var result = body.data.feed.entry.filter(function(elem) {
+                        return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showEpisode);
+                    });
+                    if(result.length > 0) {
+                        return result[0];
+                    }
+                    else {
+                        return -1;
+                    }
+                }
+            };
 
-        
+            // If episode doesnt exist, return 404 page
+            if(x() == -1) {
+                res.redirect("/404");
+            }
+            else {
+                res.render("showDetail", {
+                    SubpageTitle: show.title,
+                    ShowDetails: show,
+                    Rss: body.data.feed.entry,
+                    GetThumb: function(item) {
+                        return item['media:group'][0]['media:thumbnail'][0].ATTR.url;
+                    },
+                    GetDescription: function(item) {
+                        return item['media:group'][0]['media:description'][0];
+                    },
+                    FormatDateTimeToCZ: function(str) {
+                        return formatDateTimeToCZ(str);
+                    },
+                    Episode: function() {
+                        return x();
+                    },
+                    SanitizeStringToUrl: function(str) {
+                        return sanitizeStringToUrl(str);
+                    }
+                });
+            }
+        });
     });
 });
 
@@ -182,6 +224,13 @@ function getYoutubeFeed(youtubeUrl) {
     }
 
     return feed;
+}
+
+function sanitizeStringToUrl(str) {
+    str = str.toString();
+    str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    str = str.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    return str;
 }
 
 module.exports = router;

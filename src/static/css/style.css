@@ -228,12 +228,6 @@ div.rightCol {
     vertical-align: middle;
 }
 
-#listOfShows .shows .item p {
-    font-size: 10pt;
-    white-space: pre-wrap;
-    padding: 0.5em 1em 0 1em;
-}
-
 #listOfShows .detail .item {
     width: 500px;
 }
@@ -242,12 +236,39 @@ div.rightCol {
     width: 500px;
 }
 
-#listOfShows .detail .item span.published {
+#showDescription {
+    background: #ffffff;
+    padding: 1em 0 2em 0;
+}
+
+#showDescription p {
+    font-size: 10.5pt;
+    white-space: pre-wrap;
+    padding: 0.5em 1em 0 1em;
+}
+
+#showDescription span.sourceLink {
+    border-top: solid 1px #cccccc;
+    display: block;
+    font-size: 10.5pt;
+    padding: 1.5em 1em 0 1em;
+    margin-top: 2em;
+}
+
+#showDescription span.published {
     font-size: 9pt;
     color: #999999;
-    padding: 0 1em 0.5em 1em;
+    padding: 0 1em 0.5em 1.2em;
     display: block;
-    text-align: right;
+    text-align: left;
+}
+
+#showDescription a:link, #showDescription a:visited {
+    color: #666666;
+}
+
+#showDescription a:hover {
+    color: var(--blue);
 }
 
 #weather .title {
