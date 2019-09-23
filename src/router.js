@@ -90,74 +90,79 @@ router.get("/porad/:showTitle/:showEpisode", function(req, res) {
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         show = shows.find(function(elem) {
             return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showTitle);
-        })
-        // Update "views" counter by adding 1
-        var views = 1;
-        if(show.views != null) {
-            views = show.views + 1;
+        });
+        if(show == null || show.length <= 0) {
+            res.redirect("/404");
         }
-        db.rdb.table("shows").get(show.id).update({"views": views}).run();
-
-        // Get YouTube feed link
-        var feed = getYoutubeFeed(show.youtube);
-
-        // Get YouTube XML and parse it to JSON
-        var body = new EventEmitter();
-        request(feed, function(error, response, data) {
-            parser.parseString(data, function(error, result) {
-                body.data = result;
-                body.emit('update');
-            });
-        });
-
-        // Feed request is async, so when emitter is updated, render the page
-        body.on('update', function () {
-            // Find if episode is specified. If not, return latest episode.
-            var x = function() {
-                if(req.params.showEpisode == null || req.params.showEpisode == "" || req.params.showEpisode == "nejnovejsi") {
-                    return body.data.feed.entry[0];
-                }
-                // If yes, check if it exists. If yes, return it. If not return -1.
-                else {
-                    var result = body.data.feed.entry.filter(function(elem) {
-                        return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showEpisode);
-                    });
-                    if(result.length > 0) {
-                        return result[0];
-                    }
-                    else {
-                        return -1;
-                    }
-                }
-            };
-
-            // If episode doesnt exist, return 404 page
-            if(x() == -1) {
-                res.redirect("/404");
+        else {
+            // Update "views" counter by adding 1
+            var views = 1;
+            if(show.views != null) {
+                views = show.views + 1;
             }
-            else {
-                res.render("showDetail", {
-                    SubpageTitle: show.title,
-                    ShowDetails: show,
-                    Rss: body.data.feed.entry,
-                    GetThumb: function(item) {
-                        return item['media:group'][0]['media:thumbnail'][0].ATTR.url;
-                    },
-                    GetDescription: function(item) {
-                        return item['media:group'][0]['media:description'][0];
-                    },
-                    FormatDateTimeToCZ: function(str) {
-                        return formatDateTimeToCZ(str);
-                    },
-                    Episode: function() {
-                        return x();
-                    },
-                    SanitizeStringToUrl: function(str) {
-                        return sanitizeStringToUrl(str);
-                    }
+            db.rdb.table("shows").get(show.id).update({"views": views}).run();
+
+            // Get YouTube feed link
+            var feed = getYoutubeFeed(show.youtube);
+
+            // Get YouTube XML and parse it to JSON
+            var body = new EventEmitter();
+            request(feed, function(error, response, data) {
+                parser.parseString(data, function(error, result) {
+                    body.data = result;
+                    body.emit('update');
                 });
-            }
-        });
+            });
+
+            // Feed request is async, so when emitter is updated, render the page
+            body.on('update', function () {
+                // Find if episode is specified. If not, return latest episode.
+                var x = function() {
+                    if(req.params.showEpisode == null || req.params.showEpisode == "" || req.params.showEpisode == "nejnovejsi") {
+                        return body.data.feed.entry[0];
+                    }
+                    // If yes, check if it exists. If yes, return it. If not return -1.
+                    else {
+                        var result = body.data.feed.entry.filter(function(elem) {
+                            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showEpisode);
+                        });
+                        if(result.length > 0) {
+                            return result[0];
+                        }
+                        else {
+                            return -1;
+                        }
+                    }
+                };
+
+                // If episode doesnt exist, return 404 page
+                if(x() == -1) {
+                    res.redirect("/404");
+                }
+                else {
+                    res.render("showDetail", {
+                        SubpageTitle: show.title,
+                        ShowDetails: show,
+                        Rss: body.data.feed.entry,
+                        GetThumb: function(item) {
+                            return item['media:group'][0]['media:thumbnail'][0].ATTR.url;
+                        },
+                        GetDescription: function(item) {
+                            return item['media:group'][0]['media:description'][0];
+                        },
+                        FormatDateTimeToCZ: function(str) {
+                            return formatDateTimeToCZ(str);
+                        },
+                        Episode: function() {
+                            return x();
+                        },
+                        SanitizeStringToUrl: function(str) {
+                            return sanitizeStringToUrl(str);
+                        }
+                    });
+                }
+            });
+        }
     });
 });
 
@@ -165,8 +170,38 @@ router.get("/filmy", function(req, res) {
     db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
         res.render("movies", {
             SubpageTitle: i18n.__('Movies'),
-            ShowsList: shows
+            ShowsList: shows,
+            SanitizeStringToUrl: function(str) {
+                return sanitizeStringToUrl(str);
+            }
         });
+    });
+});
+
+router.get("/filmy/:showMovie", function(req, res) {  
+    db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
+        show = shows.find(function(elem) {
+            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showMovie);
+        });
+        if(show == null || show.length <= 0) {
+            res.redirect("/404");
+        }
+        else {
+            // Update "views" counter by adding 1
+            var views = 1;
+            if(show.views != null) {
+                views = show.views + 1;
+            }
+            db.rdb.table("shows").get(show.id).update({"views": views}).run();
+
+            res.render("movieDetail", {
+                SubpageTitle: show.title,
+                ShowDetails: show,
+                SanitizeStringToUrl: function(str) {
+                    return sanitizeStringToUrl(str);
+                }
+            });
+        }
     });
 });
 

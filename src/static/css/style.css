@@ -217,15 +217,14 @@ div.rightCol {
     height: 50px;
 }
 
-#listOfShows .shows .item .license {
+#listOfShows .shows .item .author {
     display: block;
-    margin: 0 1em 0.5em 1.5em;
+    margin: 0 1em 1em 1.5em;
     font-size: 8.5pt;
 }
 
-#listOfShows .shows .item .license img {
-    width: 16px;
-    vertical-align: middle;
+#listOfShows .movies .item h2 {
+    height: auto;
 }
 
 #listOfShows .detail .item h2 {
@@ -266,6 +265,12 @@ div.rightCol {
 
 #showDescription a:hover {
     color: var(--blue);
+}
+
+#showDescription .author {
+    font-weight: 600;
+    font-size: 12pt;
+    margin: auto auto auto 1em;
 }
 
 #weather .title {

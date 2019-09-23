@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <!-- Page content START -->
+    <div id="listOfShows">
+        <div class="title blueBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div id="playerContainer">
+            <% if(ShowDetails.youtube == null || ShowDetails.youtube == "") { %>
+                <video src="<%= ShowDetails.video %>" poster="<%= ShowDetails.cover %>" id="player" playsinline controls></video>
+            <% } else { %>
+                <div id="player" data-plyr-provider="youtube" data-plyr-embed-id=""></div>
+            <% } %>
+        </div>
+
+        <div id="showDescription">
+            <div class="content">
+                <h1><%= ShowDetails.title %></h1>
+                <span class="author"><a href="<%= ShowDetails.authorUrl %>"><%= ShowDetails.author %></a></span>
+                <p><%- ShowDetails.description -%></p>
+                <p>Licence: <a href="<%= ShowDetails.licenseUrl %>"><%= ShowDetails.license %></a></p>
+                <span class="sourceLink"><%= SourceLink %>&nbsp;<a href="<%= ShowDetails.url %>"><%= ShowDetails.url %></a></span>
+            </div>
+        </div>
+
+        
+        <% if(ShowDetails.youtube != null && ShowDetails.youtube != "") { %>
+            <script type="text/javascript">
+                showPlyrYT('<%= ShowDetails.youtube %>');
+                jQuery(function ($) {
+                    $('#showDescription .content').autolink();
+                });
+            </script>
+        <% } else if(ShowDetails.vimeo != null && ShowDetails.vimeo !="") { %>
+            <script type="text/javascript">
+                showPlyrYT('<%= ShowDetails.vimeo %>', "vimeo");
+                jQuery(function ($) {
+                    $('#showDescription .content').autolink();
+                });
+            </script>
+        <% } else { %>
+            <script type="text/javascript">
+                showPlyrVideo('<%= ShowDetails.video %>');
+                jQuery(function ($) {
+                    $('#showDescription .content').autolink();
+                });
+            </script>
+        <% } %>
+
+    <!-- Page content END -->
+
+    <% include partials/footer %>
+</body>
+</html>
