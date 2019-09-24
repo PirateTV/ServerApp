@@ -39,22 +39,26 @@ router.get("/", function(req, res) {
 
 router.get("/porady", function(req, res) {
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
-        // Get list of all genres from db (should be optimalized on side of JS from previous db request)
-        db.rdb.table("shows").filter({"category":"show"}).orderBy("genre").getField("genre").distinct().run().then(function(genres) {
-            res.render("shows", {
-                SubpageTitle: i18n.__('Shows'),
-                Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
-                AlphaTitles: function(l) {
-                    return shows.filter(i => {
-                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
-                    });
-                },
-                Genres: genres,
-                SelectedGenre: "all",
-                SanitizeStringToUrl: function(str) {
-                    return sanitizeStringToUrl(str);
-                }
-            });
+        // Get list of all genres from db
+        var genres = [];
+        for(var i=0; i<shows.length; i++) {
+            genres.push(shows[i].genre);
+        }
+        const distinct = (value, index, self) => { return self.indexOf(value) === index; }
+        genres = genres.filter(distinct).sort();
+        res.render("shows", {
+            SubpageTitle: i18n.__('Shows'),
+            Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
+            AlphaTitles: function(l) {
+                return shows.filter(i => {
+                    return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                });
+            },
+            Genres: genres,
+            SelectedGenre: "all",
+            SanitizeStringToUrl: function(str) {
+                return sanitizeStringToUrl(str);
+            }
         });
     });
 });
@@ -69,7 +73,7 @@ router.get("/porady/:genre", function(req, res) {
             res.redirect("/porady");
         }
         else {
-            // Get list of all genres from db (should be optimalized on side of JS from previous db request)
+            // Get list of all genres from db
             var genres = [];
             for(var i=0; i<shows.length; i++) {
                 genres.push(shows[i].genre);
