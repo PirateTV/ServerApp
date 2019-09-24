@@ -23,10 +23,10 @@
                     <a href="/porady" class="letter"><%= AllGenres %></a>
                     <% } %>
                     <% for(let j = 0; j < Genres.length; j++) { %>
-                        <% if(SelectedGenre == Genres[j]){ %>
-                        <a href="/porady/<%= Genres[j] %>" class="letter selected"><%= Genres[j] %></a>
+                        <% if(SelectedGenre == SanitizeStringToUrl(Genres[j])){ %>
+                        <a href="/porady/<%= SanitizeStringToUrl(Genres[j]) %>" class="letter selected"><%= Genres[j] %></a>
                         <% } else{ %>
-                        <a href="/porady/<%= Genres[j] %>" class="letter"><%= Genres[j] %></a>
+                        <a href="/porady/<%= SanitizeStringToUrl(Genres[j]) %>" class="letter"><%= Genres[j] %></a>
                         <% } %>
                     <% } %>
                 </div>

@@ -61,14 +61,27 @@ router.get("/porady", function(req, res) {
 
 // Filter view on selected genre
 router.get("/porady/:genre", function(req, res) {
-    db.rdb.table("shows").filter({"category":"show", "genre" : req.params.genre}).orderBy("title").run().then(function(shows) {
-        // Get list of all genres from db (should be optimalized on side of JS from previous db request)
-        db.rdb.table("shows").filter({"category":"show"}).orderBy("genre").getField("genre").distinct().run().then(function(genres) {
+    db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
+        show = shows.filter(function(elem) {
+            return sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl(req.params.genre);
+        });
+        if(show == null || show.length <= 0) {
+            res.redirect("/porady");
+        }
+        else {
+            // Get list of all genres from db (should be optimalized on side of JS from previous db request)
+            var genres = [];
+            for(var i=0; i<shows.length; i++) {
+                genres.push(shows[i].genre);
+            }
+            const distinct = (value, index, self) => { return self.indexOf(value) === index; }
+            genres = genres.filter(distinct);
+
             res.render("shows", {
                 SubpageTitle: i18n.__('Shows'),
                 Letters: 'ABCČDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
                 AlphaTitles: function(l) {
-                    return shows.filter(i => {
+                    return show.filter(i => {
                         return i.title.toLowerCase().indexOf(l.toLowerCase()) === 0;
                     });
                 },
@@ -78,7 +91,7 @@ router.get("/porady/:genre", function(req, res) {
                     return sanitizeStringToUrl(str);
                 }
             });
-        });
+        }
     });
 });
 
