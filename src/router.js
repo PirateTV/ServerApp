@@ -43,10 +43,10 @@ router.get("/porady", function(req, res) {
         db.rdb.table("shows").filter({"category":"show"}).orderBy("genre").getField("genre").distinct().run().then(function(genres) {
             res.render("shows", {
                 SubpageTitle: i18n.__('Shows'),
-                Letters: 'ABCČDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+                Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
                 AlphaTitles: function(l) {
                     return shows.filter(i => {
-                        return i.title.toLowerCase().indexOf(l.toLowerCase()) === 0;
+                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                     });
                 },
                 Genres: genres,
@@ -79,10 +79,10 @@ router.get("/porady/:genre", function(req, res) {
 
             res.render("shows", {
                 SubpageTitle: i18n.__('Shows'),
-                Letters: 'ABCČDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+                Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
                 AlphaTitles: function(l) {
                     return show.filter(i => {
-                        return i.title.toLowerCase().indexOf(l.toLowerCase()) === 0;
+                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                     });
                 },
                 Genres: genres,
