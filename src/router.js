@@ -75,7 +75,7 @@ router.get("/porady/:genre", function(req, res) {
                 genres.push(shows[i].genre);
             }
             const distinct = (value, index, self) => { return self.indexOf(value) === index; }
-            genres = genres.filter(distinct);
+            genres = genres.filter(distinct).sort();
 
             res.render("shows", {
                 SubpageTitle: i18n.__('Shows'),
