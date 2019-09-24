@@ -503,6 +503,10 @@ div.rightCol {
     display: none;
 }
 
+#headerSpacer {
+    height: 0;
+}
+
 @media all and (max-width: 1600px) {
     div.content {
         margin: auto 6em auto 6em;
@@ -537,6 +541,16 @@ div.rightCol {
         height: auto;
     }
 
+    #headerSpacer {
+        height: 60px;
+    }
+
+    #header {
+        z-index: 8001;
+        position: fixed;
+        width: 100%;
+    }
+
     #menu {
         position: absolute;
         top: 50px;
@@ -549,7 +563,7 @@ div.rightCol {
     }
 
     #mobileMenuUnder {
-        position: absolute;
+        position: fixed;
         top: 70px;
         left: 0;
         width: 100%;
@@ -557,12 +571,17 @@ div.rightCol {
         background: rgba(0, 0, 0, 0.5);
         z-index: 7000;
         display: none;
+        
     }
 
     #header div.mobile, #header div.rightCol a {
         display: block !important;
     }
     
+    #header div.rightCol a {
+        margin: 0 !important;
+    }
+
     #img404 {
         width: 400px;
     }
