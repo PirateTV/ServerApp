@@ -17,7 +17,11 @@
 
         <div id="playerContainer">
             <% if(ShowDetails.youtube == null || ShowDetails.youtube == "") { %>
-                <video src="<%= ShowDetails.video %>" id="player" playsinline controls></video>
+                <video src="<%= ShowDetails.video %>" id="player" playsinline controls>                    
+                    <% if(ShowDetails.captions != null && ShowDetails.captions != "") { %>
+                    <track kind="captions" label="Čeština" src="<%= ShowDetails.captions %>" srclang="cs" default />
+                    <% } %>
+                </video>
             <% } else { %>
                 <div id="player" data-plyr-provider="youtube" data-plyr-embed-id=""></div>
             <% } %>
@@ -37,25 +41,22 @@
         <% if(ShowDetails.youtube != null && ShowDetails.youtube != "") { %>
             <script type="text/javascript">
                 showPlyrYT('<%= ShowDetails.youtube %>');
-                jQuery(function ($) {
-                    $('#showDescription .content').autolink();
-                });
             </script>
         <% } else if(ShowDetails.vimeo != null && ShowDetails.vimeo !="") { %>
             <script type="text/javascript">
                 showPlyrYT('<%= ShowDetails.vimeo %>', "vimeo");
-                jQuery(function ($) {
-                    $('#showDescription .content').autolink();
-                });
             </script>
         <% } else { %>
             <script type="text/javascript">
                 showPlyrVideo('<%= ShowDetails.video %>');
-                jQuery(function ($) {
-                    $('#showDescription .content').autolink();
-                });
             </script>
         <% } %>
+
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $('#showDescription .content').autolink();
+            });
+        </script>
 
     <!-- Page content END -->
 

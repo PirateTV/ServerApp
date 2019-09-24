@@ -8,10 +8,11 @@ function showPlyrYT(youtubeUrl, provider="youtube") {
   //$("#player").attr("data-plyr-embed-id", youtubeUrl);
   $("#playerContainer").append(player);
   $("#playerContainer").show();
-  new Plyr("#player");
+  window.playerObj = new Plyr("#player");
 }
 
 function showPlyrVideo(videoUrl) {
   $("#playerContainer").show();
-  new Plyr("#player");
+  window.playerObj = new Plyr("#player");
+  window.playerObj.toggleCaptions(true);
 }
