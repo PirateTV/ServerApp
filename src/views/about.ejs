@@ -27,7 +27,7 @@
             <p>
                 <ul>
                     <% for(let i = 0; i < Feeds.length; i++) { %>
-                    <li><a href="<%= Feeds[i] %>" class="item"><%= Feeds[i] %></a></li>
+                    <li><%= Feeds[i][0] %> | <a href="<%= Feeds[i][1] %>" class="item"><%= Feeds[i][1] %></a></li>
                     <% } %>    
                 </ul>
             </p>

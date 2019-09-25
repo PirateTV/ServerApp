@@ -269,10 +269,10 @@ router.get("/pocasi", function(req, res) {
 router.get("/o-nas", function(req, res) {
     saveClientLog(req);
 
-    db.rdb.table("shows").filter({"category":"show"}).run().then(function(shows) {
-        var feeds = ["https://www.piratskelisty.cz/rss/", "https://www.piratskelisty.cz/rss/aktuality"];
+    db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
+        var feeds = [["Pirátské listy - články", "https://www.piratskelisty.cz/rss/"], ["Pirátské listy - aktuality","https://www.piratskelisty.cz/rss/aktuality"]];
         for(var i=0; i<shows.length; i++) {
-            feeds.push(getYoutubeFeed(shows[i].youtube));
+            feeds.push([shows[i].title, getYoutubeFeed(shows[i].youtube)]);
         }
 
         res.render("about", {
@@ -280,7 +280,7 @@ router.get("/o-nas", function(req, res) {
             SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-            Feeds: feeds
+            Feeds: feeds,
         });
     });
 });
@@ -344,7 +344,6 @@ function sanitizeStringToUrl(str) {
     str = str.replace(/[^a-z0-9]/gi, '-').toLowerCase();
     return str;
 }
-
 function saveClientLog(req) {
     var geo = geoip.lookup(req.headers['x-real-ip']);
     let date_ob = new Date();
