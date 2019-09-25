@@ -8,6 +8,7 @@ var EventEmitter = require("events").EventEmitter;
 var parser = require('xml2js').Parser({ attrkey: "ATTR" });
 var getThumb = require('video-thumbnail-url');
 var geoip = require('geoip-lite');
+const requestIp = require('request-ip');
 
 // Dynamic endpoints
 router.get("/", function(req, res) {
@@ -298,7 +299,7 @@ router.get("/404", function(req, res) {
 
 router.get("/zive", function(req, res) {
     saveClientLog(req);
-    
+
     db.rdb.table("shows").filter({"category":"live"}).orderBy("title").run().then(function(shows) {
         res.render("livestreams", {
             SubpageTitle: i18n.__('LiveStreams'),
@@ -346,7 +347,7 @@ function sanitizeStringToUrl(str) {
 }
 
 function saveClientLog(req) {
-    var geo = geoip.lookup(req.ip);
+    var geo = geoip.lookup(req.headers['x-real-ip']);
     let date_ob = new Date();
 
     let date = ("0" + date_ob.getDate()).slice(-2);
@@ -358,7 +359,7 @@ function saveClientLog(req) {
     
     db.rdb.table("clientLog").insert({
         "DateTime" : year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds,
-        "ClientIP": req.ip,
+        "ClientIP": req.headers['x-real-ip'],
         "RequestUrl" : req.protocol + '://' + req.get('host') + req.originalUrl,
         "Country" : (geo ? geo.country: "Unknown"),
         "Region" : (geo ? geo.region: "Unknown"),
