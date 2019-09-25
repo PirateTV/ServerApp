@@ -9,7 +9,7 @@ Většina věcí je momentálně "hardcoded" přímo ve zdrojovém kódu, jeliko
 
 ## Použité technologie
 - NodeJS
-- Vue.js
+- ExpressJS
 - RethinkDB https://rethinkdb.com/
 - Moduly NodeJS uvedené v package.json
 - Grafické soubory z https://www.flaticon.com/, https://www.subtlepatterns.com/

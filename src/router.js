@@ -8,7 +8,6 @@ var EventEmitter = require("events").EventEmitter;
 var parser = require('xml2js').Parser({ attrkey: "ATTR" });
 var getThumb = require('video-thumbnail-url');
 var geoip = require('geoip-lite');
-const requestIp = require('request-ip');
 
 // Dynamic endpoints
 router.get("/", function(req, res) {
@@ -366,6 +365,8 @@ function saveClientLog(req) {
         "Browser" : req.headers["user-agent"],
         "Language" : req.headers["accept-language"]
     }).run();
+
+    console.log(req.headers.origin);
 }
 
 module.exports = router;
