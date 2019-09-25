@@ -362,7 +362,7 @@ function saveClientLog(req) {
         "ClientIP": req.headers['x-real-ip'],
         "RequestUrl" : req.protocol + '://' + req.get('host') + req.originalUrl,
         "Country" : (geo ? geo.country: "Unknown"),
-        "Region" : (geo ? geo.region: "Unknown"),
+        "Region" : (geo ? geo.city: "Unknown"),
         "Browser" : req.headers["user-agent"],
         "Language" : req.headers["accept-language"]
     }).run();
