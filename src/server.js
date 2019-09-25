@@ -17,9 +17,10 @@ var translateApp = require('./translateApp.js');
 
 const { version } = require('./package.json');
 
-
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+
+app.set('trust proxy', true);
 
 // translate application
 i18n.configure({
@@ -35,12 +36,6 @@ app.use(bodyParser.json());
 app.use(i18n.init);
 // Static endpoints
 app.use(express.static('static'));
-// Use Sessions for tracking logins
-app.use(session({
-  secret: 'ee874ec6-5068-445d-a83f-c0c054144d6b',
-  resave: true,
-  saveUninitialized: false,
-}));
 // Dynamic endpoints
 app.use("/bower_components", express.static("bower_components"));
 app.use("/", router);

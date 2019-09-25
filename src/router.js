@@ -7,9 +7,12 @@ var request = require("request");
 var EventEmitter = require("events").EventEmitter;
 var parser = require('xml2js').Parser({ attrkey: "ATTR" });
 var getThumb = require('video-thumbnail-url');
+var geoip = require('geoip-lite');
 
 // Dynamic endpoints
 router.get("/", function(req, res) {
+    saveClientLog(req);
+
     // Load most viewed shows
     db.rdb.table("shows").filter({"category":"show"}).orderBy(db.rdb.desc("views")).run().then(function(shows) {
         // Load topics from news
@@ -41,6 +44,8 @@ router.get("/", function(req, res) {
 });
 
 router.get("/porady", function(req, res) {
+    saveClientLog(req);
+
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         // Get list of all genres from db
         var genres = [];
@@ -71,6 +76,8 @@ router.get("/porady", function(req, res) {
 
 // Filter view on selected genre
 router.get("/porady/:genre", function(req, res) {
+    saveClientLog(req);
+
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         show = shows.filter(function(elem) {
             return sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl(req.params.genre);
@@ -109,10 +116,14 @@ router.get("/porady/:genre", function(req, res) {
 });
 
 router.get("/porad/:showTitle", function(req, res) {
+    saveClientLog(req);
+
     res.redirect("/porad/" + req.params.showTitle + "/nejnovejsi");
 });
 
 router.get("/porad/:showTitle/:showEpisode", function(req, res) {  
+    saveClientLog(req);
+
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         show = shows.find(function(elem) {
             return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showTitle);
@@ -196,6 +207,8 @@ router.get("/porad/:showTitle/:showEpisode", function(req, res) {
 });
 
 router.get("/filmy", function(req, res) {
+    saveClientLog(req);
+
     db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
         res.render("movies", {
             SubpageTitle: i18n.__('Movies'),
@@ -211,6 +224,8 @@ router.get("/filmy", function(req, res) {
 });
 
 router.get("/filmy/:showMovie", function(req, res) {  
+    saveClientLog(req);
+
     db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
         show = shows.find(function(elem) {
             return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showMovie);
@@ -241,6 +256,8 @@ router.get("/filmy/:showMovie", function(req, res) {
 });
 
 router.get("/pocasi", function(req, res) {
+    saveClientLog(req);
+
     res.render("weather", {
         SubpageTitle: i18n.__('Weather'),
         SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
@@ -250,6 +267,8 @@ router.get("/pocasi", function(req, res) {
 });
 
 router.get("/o-nas", function(req, res) {
+    saveClientLog(req);
+
     db.rdb.table("shows").filter({"category":"show"}).run().then(function(shows) {
         var feeds = ["https://www.piratskelisty.cz/rss/", "https://www.piratskelisty.cz/rss/aktuality"];
         for(var i=0; i<shows.length; i++) {
@@ -267,6 +286,8 @@ router.get("/o-nas", function(req, res) {
 });
 
 router.get("/404", function(req, res) {
+    saveClientLog(req);
+
     res.render("404", {
         SubpageTitle: i18n.__('404-NotFound'),
         SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
@@ -276,6 +297,8 @@ router.get("/404", function(req, res) {
 });
 
 router.get("/zive", function(req, res) {
+    saveClientLog(req);
+    
     db.rdb.table("shows").filter({"category":"live"}).orderBy("title").run().then(function(shows) {
         res.render("livestreams", {
             SubpageTitle: i18n.__('LiveStreams'),
@@ -320,6 +343,28 @@ function sanitizeStringToUrl(str) {
     str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     str = str.replace(/[^a-z0-9]/gi, '-').toLowerCase();
     return str;
+}
+
+function saveClientLog(req) {
+    var geo = geoip.lookup(req.ip);
+    let date_ob = new Date();
+
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
+    
+    db.rdb.table("clientLog").insert({
+        "DateTime" : year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds,
+        "ClientIP": req.ip,
+        "RequestUrl" : req.protocol + '://' + req.get('host') + req.originalUrl,
+        "Country" : (geo ? geo.country: "Unknown"),
+        "Region" : (geo ? geo.region: "Unknown"),
+        "Browser" : req.headers["user-agent"],
+        "Language" : req.headers["accept-language"]
+    }).run();
 }
 
 module.exports = router;
