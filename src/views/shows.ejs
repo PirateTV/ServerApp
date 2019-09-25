@@ -44,7 +44,7 @@
         </div>
 
         <div class="shows">
-            <div class="content">
+            <div class="content movies">
                 <% for(let j = 0; j < Letters.length; j++) { %>
                     <% if(AlphaTitles(Letters[j]).length > 0){ %>
                     <h1 id="<%= Letters[j] %>"><%= Letters[j] %></h1>
@@ -53,6 +53,7 @@
                         <a href="/porad/<%= SanitizeStringToUrl(AlphaTitles(Letters[j])[i].title) %>" class="item">
                             <img src="<%= AlphaTitles(Letters[j])[i].cover %>" alt="<%= AlphaTitles(Letters[j])[i].title %>" />
                             <h2><%= AlphaTitles(Letters[j])[i].title %></h2>
+                            <span class="author">&#9875;&nbsp;<%= AlphaTitles(Letters[j])[i].genre %></span>
                         </a>
                         <% } %>
                 <% } %>
