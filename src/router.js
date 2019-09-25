@@ -365,8 +365,6 @@ function saveClientLog(req) {
         "Browser" : req.headers["user-agent"],
         "Language" : req.headers["accept-language"]
     }).run();
-
-    console.log(req.headers.origin);
 }
 
 module.exports = router;

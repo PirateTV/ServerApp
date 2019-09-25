@@ -17,7 +17,7 @@ Většina věcí je momentálně "hardcoded" přímo ve zdrojovém kódu, jeliko
 
 ## Instalace
 - Nainstalujte a spustťe si RethinkDB https://rethinkdb.com/docs/install/
-- Vytvořte v RethinkDB databázi `piratskatelevize` a v ní tabulku `shows`
+- Vytvořte v RethinkDB databázi `piratskatelevize` a v ní tabulky `shows` a `clientLog`
 - Naklonujte si tento repozitář.
 - Pomocí příkazu `npm install` nainstalujte veškeré závislosti.
 - Aplikace používá bower, nicméně všechny kompatibilní komponenty jsou přiloženy v repozitáři
