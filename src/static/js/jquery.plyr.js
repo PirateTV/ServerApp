@@ -1,5 +1,6 @@
 function showPlyrYT(youtubeUrl, provider="youtube") {
   $("#playerContainer").show();
+  $("#player").attr("src", "http://www.youtube.com/embed/" + youtubeUrl)
 }
 
 function showPlyrVideo(videoUrl) {
