@@ -16,7 +16,7 @@
         </div>
 
         <div id="playerContainer" class="youtube">
-            <iframe id="player"></iframe>
+            <iframe id="player" src="https://www.youtube.com/embed/<%= ShowYoutubeVideoId %>"></iframe>
         </div>
 
         <div id="showDescription">
@@ -41,7 +41,7 @@
         </div>
 
         <script type="text/javascript">
-            showPlyrYT("<%= ShowYoutubeVideoId %>");
+            showPlyrYT();
             jQuery(function ($) {
                 $('#showDescription .content').autolink();
             });
