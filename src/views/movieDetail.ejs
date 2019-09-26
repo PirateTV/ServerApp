@@ -15,15 +15,16 @@
             </div>
         </div>
 
-        <div id="playerContainer">
             <% if(ShowDetails.youtube == null || ShowDetails.youtube == "") { %>
+            <div id="playerContainer">
                 <video src="<%= ShowDetails.video %>" id="player" playsinline controls>                    
                     <% if(ShowDetails.captions != null && ShowDetails.captions != "") { %>
                     <track kind="captions" label="Čeština" src="<%= ShowDetails.captions %>" srclang="cs" default />
                     <% } %>
                 </video>
             <% } else { %>
-                <div id="player" data-plyr-provider="youtube" data-plyr-embed-id=""></div>
+                <div id="playerContainer" class="youtube">
+                <iframe id="player" src="http://www.youtube.com/embed/<%= ShowYoutubeVideoId %>"></iframe>
             <% } %>
         </div>
 

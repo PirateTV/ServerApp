@@ -183,6 +183,7 @@ router.get("/porad/:showTitle/:showEpisode", function(req, res) {
                         SubpageCover: x()['media:group'][0]['media:thumbnail'][0].ATTR.url,
                         SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                         ShowDetails: show,
+                        ShowYoutubeVideoId: x()['yt:videoId'],
                         Rss: body.data.feed.entry,
                         GetThumb: function(item) {
                             return item['media:group'][0]['media:thumbnail'][0].ATTR.url;
@@ -241,12 +242,14 @@ router.get("/filmy/:showMovie", function(req, res) {
             }
             db.rdb.table("shows").get(show.id).update({"views": views}).run();
 
+            console.log(show.youtube == null ? "" : show.youtube);
             res.render("movieDetail", {
                 SubpageTitle: show.title,
                 SubpageDescription: show.description,
                 SubpageCover: show.cover,
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 ShowDetails: show,
+                ShowYoutubeVideoId: (show.youtube == null ? "" : videoIdFromYtLink(show.youtube)),
                 SanitizeStringToUrl: function(str) {
                     return sanitizeStringToUrl(str);
                 }
@@ -366,4 +369,8 @@ function saveClientLog(req) {
     }).run();
 }
 
+function videoIdFromYtLink(url) {
+    VID_REGEX = /(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/; 
+    return url.match(VID_REGEX)[1]; 
+}
 module.exports = router;
