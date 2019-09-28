@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <!-- Page content START -->
+    <div id="listOfShows">
+        <div class="title orangeBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div id="playerContainer" class="youtube">
+            <iframe id="player" src="https://www.youtube.com/embed/<%= ShowYoutubeVideoId %>"></iframe>
+        </div>
+
+        <div id="showDescription">
+            <div class="content">
+                <h1><%= Episode().title %></h1>
+                <span class="published"><%= Published %>&nbsp;<%= FormatDateTimeToCZ(Episode().published) %></span>
+                <p><%- GetDescription(Episode()) -%></p>
+                <span class="sourceLink"><%= SourceLink %>&nbsp;<a href="<%= Episode().link[0].ATTR.href %>"><%= Episode().link[0].ATTR.href %></a></span>
+            </div>
+        </div>
+
+        <div class="shows detail">
+            <div class="content">
+
+                <% for(let i = 0; i < Rss.length; i++) { %>
+                    <a href="/region/<%= SanitizeStringToUrl(ShowDetails.title) %>/<%= SanitizeStringToUrl(Rss[i].title) %>" class="item orangeUnderline">
+                        <img src="<%= GetThumb(Rss[i]) %>" alt="<%= Rss[i].title %>" />
+                        <h2><%= Rss[i].title %></h2>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            showPlyrYT();
+            jQuery(function ($) {
+                $('#showDescription .content').autolink();
+            });
+        </script>
+
+    <!-- Page content END -->
+
+    <% include partials/footer %>
+</body>
+</html>

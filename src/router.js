@@ -47,6 +47,9 @@ router.get("/porady", function(req, res) {
     saveClientLog(req);
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
+        shows = shows.filter(function(elem) {
+            return (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Kraje")) && (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Regiony"));
+        });
         // Get list of all genres from db
         var genres = [];
         for(var i=0; i<shows.length; i++) {
@@ -91,6 +94,9 @@ router.get("/porady/:genre", function(req, res) {
             for(var i=0; i<shows.length; i++) {
                 genres.push(shows[i].genre);
             }
+            genres = genres.filter(function(elem) {
+                return (sanitizeStringToUrl(elem) != sanitizeStringToUrl("Kraje")) && (sanitizeStringToUrl(elem) != sanitizeStringToUrl("Regiony"));
+            });
             const distinct = (value, index, self) => { return self.indexOf(value) === index; }
             genres = genres.filter(distinct).sort();
 
@@ -122,89 +128,94 @@ router.get("/porad/:showTitle", function(req, res) {
 });
 
 router.get("/porad/:showTitle/:showEpisode", function(req, res) {  
+    showEpisode(req, res);
+});
+
+router.get("/regiony", function(req, res) {
     saveClientLog(req);
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
-        show = shows.find(function(elem) {
-            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showTitle);
+        shows = shows.filter(function(elem) {
+            return (sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl("Kraje")) || (sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl("Regiony"));
+        });
+        // Get list of all genres from db
+        var genres = [];
+        for(var i=0; i<shows.length; i++) {
+            genres.push(shows[i].genre);
+        }
+        const distinct = (value, index, self) => { return self.indexOf(value) === index; }
+        genres = genres.filter(distinct).sort();
+        res.render("regions", {
+            SubpageTitle: i18n.__('Regions'),
+            SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+            SubpageCover: "https://piratskatelevize.cz/images/icon.png",
+            SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+            Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
+            AlphaTitles: function(l) {
+                return shows.filter(i => {
+                    return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                });
+            },
+            Genres: genres,
+            SelectedGenre: "all",
+            SanitizeStringToUrl: function(str) {
+                return sanitizeStringToUrl(str);
+            }
+        });
+    });
+});
+
+router.get("/regiony/:genre", function(req, res) {
+    saveClientLog(req);
+
+    db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
+        show = shows.filter(function(elem) {
+            return sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl(req.params.genre);
         });
         if(show == null || show.length <= 0) {
-            res.redirect("/404");
+            res.redirect("/regiony");
         }
         else {
-            // Update "views" counter by adding 1
-            var views = 1;
-            if(show.views != null) {
-                views = show.views + 1;
+            // Get list of all genres from db
+            var genres = [];
+            for(var i=0; i<shows.length; i++) {
+                genres.push(shows[i].genre);
             }
-            db.rdb.table("shows").get(show.id).update({"views": views}).run();
-
-            // Get YouTube feed link
-            var feed = getYoutubeFeed(show.youtube);
-
-            // Get YouTube XML and parse it to JSON
-            var body = new EventEmitter();
-            request(feed, function(error, response, data) {
-                parser.parseString(data, function(error, result) {
-                    body.data = result;
-                    body.emit('update');
-                });
+            genres = genres.filter(function(elem) {
+                return (sanitizeStringToUrl(elem) == sanitizeStringToUrl("Kraje")) || (sanitizeStringToUrl(elem) == sanitizeStringToUrl("Regiony"));
             });
+            const distinct = (value, index, self) => { return self.indexOf(value) === index; }
+            genres = genres.filter(distinct).sort();
 
-            // Feed request is async, so when emitter is updated, render the page
-            body.on('update', function () {
-                // Find if episode is specified. If not, return latest episode.
-                var x = function() {
-                    if(req.params.showEpisode == null || req.params.showEpisode == "" || req.params.showEpisode == "nejnovejsi") {
-                        return body.data.feed.entry[0];
-                    }
-                    // If yes, check if it exists. If yes, return it. If not return -1.
-                    else {
-                        var result = body.data.feed.entry.filter(function(elem) {
-                            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showEpisode);
-                        });
-                        if(result.length > 0) {
-                            return result[0];
-                        }
-                        else {
-                            return -1;
-                        }
-                    }
-                };
-
-                // If episode doesnt exist, return 404 page
-                if(x() == -1) {
-                    res.redirect("/404");
-                }
-                else {
-                    res.render("showDetail", {
-                        SubpageTitle: show.title,
-                        SubpageDescription: x()['media:group'][0]['media:description'][0].slice(0, 160) + "(...)",
-                        SubpageCover: x()['media:group'][0]['media:thumbnail'][0].ATTR.url,
-                        SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-                        ShowDetails: show,
-                        ShowYoutubeVideoId: x()['yt:videoId'],
-                        Rss: body.data.feed.entry,
-                        GetThumb: function(item) {
-                            return item['media:group'][0]['media:thumbnail'][0].ATTR.url;
-                        },
-                        GetDescription: function(item) {
-                            return item['media:group'][0]['media:description'][0];
-                        },
-                        FormatDateTimeToCZ: function(str) {
-                            return formatDateTimeToCZ(str);
-                        },
-                        Episode: function() {
-                            return x();
-                        },
-                        SanitizeStringToUrl: function(str) {
-                            return sanitizeStringToUrl(str);
-                        }
+            res.render("regions", {
+                SubpageTitle: i18n.__('Regions'),
+                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageCover: "https://piratskatelevize.cz/images/icon.png",
+                SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+                Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
+                AlphaTitles: function(l) {
+                    return show.filter(i => {
+                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                     });
+                },
+                Genres: genres,
+                SelectedGenre: req.params.genre,
+                SanitizeStringToUrl: function(str) {
+                    return sanitizeStringToUrl(str);
                 }
             });
         }
     });
+});
+
+router.get("/region/:showTitle", function(req, res) {
+    saveClientLog(req);
+
+    res.redirect("/region/" + req.params.showTitle + "/nejnovejsi");
+});
+
+router.get("/region/:showTitle/:showEpisode", function(req, res) {  
+    showEpisode(req, res, "regionDetail");
 });
 
 router.get("/filmy", function(req, res) {
@@ -372,5 +383,91 @@ function saveClientLog(req) {
 function videoIdFromYtLink(url) {
     VID_REGEX = /(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/; 
     return url.match(VID_REGEX)[1]; 
+}
+
+function showEpisode(req, res, renderPage = "showDetail") {
+    saveClientLog(req);
+
+    db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
+        show = shows.find(function(elem) {
+            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showTitle);
+        });
+        if(show == null || show.length <= 0) {
+            res.redirect("/404");
+        }
+        else {
+            // Update "views" counter by adding 1
+            var views = 1;
+            if(show.views != null) {
+                views = show.views + 1;
+            }
+            db.rdb.table("shows").get(show.id).update({"views": views}).run();
+
+            // Get YouTube feed link
+            var feed = getYoutubeFeed(show.youtube);
+
+            // Get YouTube XML and parse it to JSON
+            var body = new EventEmitter();
+            request(feed, function(error, response, data) {
+                parser.parseString(data, function(error, result) {
+                    body.data = result;
+                    body.emit('update');
+                });
+            });
+
+            // Feed request is async, so when emitter is updated, render the page
+            body.on('update', function () {
+                // Find if episode is specified. If not, return latest episode.
+                var x = function() {
+                    if(req.params.showEpisode == null || req.params.showEpisode == "" || req.params.showEpisode == "nejnovejsi") {
+                        return body.data.feed.entry[0];
+                    }
+                    // If yes, check if it exists. If yes, return it. If not return -1.
+                    else {
+                        var result = body.data.feed.entry.filter(function(elem) {
+                            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showEpisode);
+                        });
+                        if(result.length > 0) {
+                            return result[0];
+                        }
+                        else {
+                            return -1;
+                        }
+                    }
+                };
+
+                // If episode doesnt exist, return 404 page
+                if(x() == -1) {
+                    res.redirect("/404");
+                }
+                else {
+                    res.render(renderPage, {
+                        SubpageTitle: show.title,
+                        SubpageDescription: x()['media:group'][0]['media:description'][0].slice(0, 160) + "(...)",
+                        SubpageCover: x()['media:group'][0]['media:thumbnail'][0].ATTR.url,
+                        SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+                        ShowDetails: show,
+                        ShowYoutubeVideoId: x()['yt:videoId'],
+                        Rss: body.data.feed.entry,
+                        GetThumb: function(item) {
+                            return item['media:group'][0]['media:thumbnail'][0].ATTR.url;
+                        },
+                        GetDescription: function(item) {
+                            return item['media:group'][0]['media:description'][0];
+                        },
+                        FormatDateTimeToCZ: function(str) {
+                            return formatDateTimeToCZ(str);
+                        },
+                        Episode: function() {
+                            return x();
+                        },
+                        SanitizeStringToUrl: function(str) {
+                            return sanitizeStringToUrl(str);
+                        }
+                    });
+                }
+            });
+        }
+    });
 }
 module.exports = router;

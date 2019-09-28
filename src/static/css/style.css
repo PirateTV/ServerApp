@@ -4,6 +4,7 @@
     --purple: rgb(77, 46, 150);
     --green: rgb(0, 139, 70);
     --darkBlue: rgb(0, 63, 88);
+    --orange: rgb(204, 109, 0);
 }
 
 html, body {
@@ -96,6 +97,10 @@ div.rightCol {
 
 #header div.rightCol a.linkShows:hover {
     border-bottom: solid 2px var(--blue);
+}
+
+#header div.rightCol a.linkRegions:hover {
+    border-bottom: solid 2px var(--orange);
 }
 
 #header div.rightCol a.linkStreams:hover {
@@ -197,6 +202,9 @@ div.rightCol {
     border-bottom: solid 2px var(--red);
 }
 
+#listOfShows .shows .orangeUnderline:hover {
+    border-bottom: solid 2px var(--orange);
+}
 
 #listOfShows .shows .item img {
     width: 290px;
@@ -459,6 +467,10 @@ div.rightCol {
 
 .redBg {
     background: var(--red);
+}
+
+.orangeBg {
+    background: var(--orange);
 }
 
 .title h1 {

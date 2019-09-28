@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <div id="listOfShows">
+        <div class="title orangeBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="sorting orangeBg">
+            <div class="content">
+                <div>
+                    <% if(SelectedGenre == "all"){ %>
+                    <a href="/regiony" class="letter selected"><%= AllGenres %></a>
+                    <% } else{ %>
+                    <a href="/regiony" class="letter"><%= AllGenres %></a>
+                    <% } %>
+                    <% for(let j = 0; j < Genres.length; j++) { %>
+                        <% if(SelectedGenre == SanitizeStringToUrl(Genres[j])){ %>
+                        <a href="/regiony/<%= SanitizeStringToUrl(Genres[j]) %>" class="letter selected"><%= Genres[j] %></a>
+                        <% } else{ %>
+                        <a href="/regiony/<%= SanitizeStringToUrl(Genres[j]) %>" class="letter"><%= Genres[j] %></a>
+                        <% } %>
+                    <% } %>
+                </div>
+
+                <div>
+                    <% for(let j = 0; j < Letters.length; j++) { %>
+                        <% if(AlphaTitles(Letters[j]).length > 0){ %>
+                            <a href="#<%= Letters[j] %>" class="letter"><%= Letters[j] %></a>
+                        <% } else{ %>
+                            <span class="letter"><%= Letters[j] %></span>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="shows">
+            <div class="content movies">
+                <% for(let j = 0; j < Letters.length; j++) { %>
+                    <% if(AlphaTitles(Letters[j]).length > 0){ %>
+                    <h1 id="<%= Letters[j] %>"><%= Letters[j] %></h1>
+                    <% } %>
+                        <% for(let i = 0; i < AlphaTitles(Letters[j]).length; i++) { %>
+                        <a href="/region/<%= SanitizeStringToUrl(AlphaTitles(Letters[j])[i].title) %>" class="item orangeUnderline">
+                            <img src="<%= AlphaTitles(Letters[j])[i].cover %>" alt="<%= AlphaTitles(Letters[j])[i].title %>" />
+                            <h2><%= AlphaTitles(Letters[j])[i].title %></h2>
+                            <span class="author">&#9875;&nbsp;<%= AlphaTitles(Letters[j])[i].genre %></span>
+                        </a>
+                        <% } %>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>
+</body>
+</html>
