@@ -120,6 +120,11 @@ div.rightCol {
     color: #ffffff;
 }
 
+#listOfShows .title p {
+    font-style: italic;
+    font-size: 10.5pt;
+}
+
 #listOfShows .sorting {
     padding: 1em 0 1em 0;
     background: #cccccc;
