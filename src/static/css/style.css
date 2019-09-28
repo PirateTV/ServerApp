@@ -154,6 +154,17 @@ div.rightCol {
     cursor: default;
 }
 
+#listOfShows .orangeBg a.letter:hover, #listOfShows .orangeBg a.leeter:hover {
+    color: var(--orange);
+    text-decoration: underline;
+}
+
+#listOfShows .orangeBg a.selected:link, #listOfShows .orangeBg a.selected:visited {
+    text-decoration: none;
+    color: var(--orange);
+    cursor: default;
+}
+
 #listOfShows .sorting span.letter, #listOfShows .shows span.letter {
     text-decoration: none;
     color: #999999;

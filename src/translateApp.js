@@ -22,6 +22,7 @@ module.exports.translateApplication = function translateApplication(app) {
         Alphabetical: i18n.__('Alphabetical'),
         ByGenre: i18n.__('ByGenre'),
         AllGenres: i18n.__('AllGenres'),
+        AllRegions: i18n.__('AllRegions'),
         Footer: {
             ScrollUp: i18n.__('ScrollUp'),
             WatchUsAlso: i18n.__('WatchUsAlso')

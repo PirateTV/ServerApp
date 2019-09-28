@@ -18,9 +18,9 @@
             <div class="content">
                 <div>
                     <% if(SelectedGenre == "all"){ %>
-                    <a href="/regiony" class="letter selected"><%= AllGenres %></a>
+                    <a href="/regiony" class="letter selected"><%= AllRegions %></a>
                     <% } else{ %>
-                    <a href="/regiony" class="letter"><%= AllGenres %></a>
+                    <a href="/regiony" class="letter"><%= AllRegions %></a>
                     <% } %>
                     <% for(let j = 0; j < Genres.length; j++) { %>
                         <% if(SelectedGenre == SanitizeStringToUrl(Genres[j])){ %>
