@@ -62,7 +62,7 @@ router.get("/porady", function(req, res) {
             SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-            Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
+            Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
             AlphaTitles: function(l) {
                 return shows.filter(i => {
                     return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
@@ -105,7 +105,7 @@ router.get("/porady/:genre", function(req, res) {
                 SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-                Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
+                Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
                 AlphaTitles: function(l) {
                     return show.filter(i => {
                         return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
@@ -145,12 +145,13 @@ router.get("/regiony", function(req, res) {
         }
         const distinct = (value, index, self) => { return self.indexOf(value) === index; }
         genres = genres.filter(distinct).sort();
+
         res.render("regions", {
             SubpageTitle: i18n.__('Regions'),
             SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-            Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
+            Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
             AlphaTitles: function(l) {
                 return shows.filter(i => {
                     return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
@@ -192,7 +193,7 @@ router.get("/regiony/:genre", function(req, res) {
                 SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-                Letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-'.split(''),
+                Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
                 AlphaTitles: function(l) {
                     return show.filter(i => {
                         return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
@@ -222,6 +223,19 @@ router.get("/filmy", function(req, res) {
     saveClientLog(req);
 
     db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
+        // Get list of all genres from db
+        var genres = [];
+        for(var i=0; i<shows.length; i++) {
+            if(shows[i].genre != null || typeof shows[i].genre !== 'undefined') {
+                for(var j=0; j<shows[i].genre.length; j++) {
+                    genres.push(shows[i].genre[j]);
+                }
+            }
+        }
+        const distinct = (value, index, self) => { return self.indexOf(value) === index; }
+        genres = genres.filter(distinct).sort();
+
+
         res.render("movies", {
             SubpageTitle: i18n.__('Movies'),
             SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
@@ -230,12 +244,71 @@ router.get("/filmy", function(req, res) {
             ShowsList: shows,
             SanitizeStringToUrl: function(str) {
                 return sanitizeStringToUrl(str);
-            }
+            },
+            Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+            AlphaTitles: function(l) {
+                return shows.filter(i => {
+                    return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                });
+            },
+            Genres: genres,
+            SelectedGenre: "all",
         });
     });
 });
 
-router.get("/filmy/:showMovie", function(req, res) {  
+router.get("/filmy/:genre", function(req, res) {
+    saveClientLog(req);
+
+    db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
+
+            // Get list of all genres from db
+            var genres = [];
+            for(var i=0; i<shows.length; i++) {
+                if(shows[i].genre != null || typeof shows[i].genre !== 'undefined') {
+                    for(var j=0; j<shows[i].genre.length; j++) {
+                        genres.push(shows[i].genre[j]);
+                    }
+                }
+            }
+            const distinct = (value, index, self) => { return self.indexOf(value) === index; }
+            genres = genres.filter(distinct).sort();
+
+            var show = [];
+            for(var i=0; i<shows.length; i++) {
+                if(shows[i].genre != null || typeof shows[i].genre !== 'undefined') {
+                    for(var j=0; j<shows[i].genre.length; j++) {
+                        if(sanitizeStringToUrl(shows[i].genre[j]) == sanitizeStringToUrl(req.params.genre)) {
+                            show.push(shows[i]);
+                        }
+                    }
+                }
+            }
+
+
+            res.render("movies", {
+                SubpageTitle: i18n.__('Movies'),
+                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageCover: "https://piratskatelevize.cz/images/icon.png",
+                SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+                ShowsList: show,
+                SanitizeStringToUrl: function(str) {
+                    return sanitizeStringToUrl(str);
+                },
+                Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+                AlphaTitles: function(l) {
+                    return show.filter(i => {
+                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                    });
+                },
+                Genres: genres,
+                SelectedGenre: req.params.genre,
+            });
+
+    });
+});
+
+router.get("/film/:showMovie", function(req, res) {  
     saveClientLog(req);
 
     db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {

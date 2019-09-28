@@ -154,7 +154,7 @@ div.rightCol {
     cursor: default;
 }
 
-#listOfShows .orangeBg a.letter:hover, #listOfShows .orangeBg a.leeter:hover {
+#listOfShows .orangeBg a.letter:hover, #listOfShows .orangeBg a.letter:hover {
     color: var(--orange);
     text-decoration: underline;
 }
@@ -162,6 +162,17 @@ div.rightCol {
 #listOfShows .orangeBg a.selected:link, #listOfShows .orangeBg a.selected:visited {
     text-decoration: none;
     color: var(--orange);
+    cursor: default;
+}
+
+#listOfShows .purpleBg a.letter:hover, #listOfShows .purpleBg a.letter:hover {
+    color: var(--purple);
+    text-decoration: underline;
+}
+
+#listOfShows .purpleBg a.selected:link, #listOfShows .purpleBg a.selected:visited {
+    text-decoration: none;
+    color: var(--purple);
     cursor: default;
 }
 
@@ -447,7 +458,7 @@ div.rightCol {
 
 #about .content li {
     font-size: 11pt;
-    color: #666666;
+    color: #000000;
 }
 
 #about .content a:link, #about .content a:visited {
