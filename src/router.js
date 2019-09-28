@@ -15,6 +15,9 @@ router.get("/", function(req, res) {
 
     // Load most viewed shows
     db.rdb.table("shows").filter({"category":"show"}).orderBy(db.rdb.desc("views")).run().then(function(shows) {
+        shows = shows.filter(function(elem) {
+            return (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Kraje")) && (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Regiony"));
+        });
         // Load topics from news
         Feed.load('https://www.piratskelisty.cz/rss/', function(err, rss) {
             Feed.load('https://www.piratskelisty.cz/rss/aktuality', function(err, rss1) {
