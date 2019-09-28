@@ -32,6 +32,11 @@
             <div class="content">
                 <h1><%= ShowDetails.title %></h1>
                 <span class="author"><a href="<%= ShowDetails.authorUrl %>"><%= ShowDetails.author %></a></span>
+                <div class="tags">
+                    <% for(let j = 0; j < ShowDetails.genre.length; j++) { %>
+                        <span><%= ShowDetails.genre[j] %></span>
+                    <% } %>
+                </div>
                 <p><%- ShowDetails.description -%></p>
                 <p>Licence: <a href="<%= ShowDetails.licenseUrl %>"><%= ShowDetails.license %></a></p>
                 <span class="sourceLink"><%= SourceLink %>&nbsp;<a href="<%= ShowDetails.url %>"><%= ShowDetails.url %></a></span>

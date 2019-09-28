@@ -57,6 +57,11 @@
                             <img src="<%= AlphaTitles(Letters[j])[i].cover %>" alt="<%= AlphaTitles(Letters[j])[i].title %>" />
                             <h2><%= AlphaTitles(Letters[j])[i].title %></h2>
                             <span class="author"><%= AlphaTitles(Letters[j])[i].author %></span>
+                            <div class="tags">
+                                <% for(let x = 0; x < AlphaTitles(Letters[j])[i].genre.length; x++) { %>
+                                    <span><%= AlphaTitles(Letters[j])[i].genre[x] %></span>
+                                <% } %>
+                            </div>
                         </a>
                         <% } %>
                 <% } %>

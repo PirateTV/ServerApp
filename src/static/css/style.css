@@ -324,6 +324,23 @@ div.rightCol {
     margin: auto auto auto 1em;
 }
 
+#showDescription .tags {
+    padding: 0.5em 1em 0.5em 1.2em;
+}
+
+#listOfShows .movies .tags {
+    padding: 0 1em 0.5em 1.2em;
+}
+
+#showDescription .tags span, #listOfShows .movies .tags span {
+    display: inline-block;
+    margin: 0 1em 0 0;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border: solid 1px var(--purple);
+    font-size: 7pt;
+    border-radius: 0.5em;
+}
+
 #weather .title {
     padding: 1em 0 1em 0;
     color: #ffffff;
