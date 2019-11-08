@@ -395,7 +395,7 @@ router.get("/zive", function(req, res) {
             SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-            ShowsList: shows
+            StreamYT: shows[0].youtube
         });
     });
 });
