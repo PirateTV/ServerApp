@@ -380,6 +380,10 @@ div.rightCol {
     text-decoration: none;
 }
 
+#bottomlinks div.rightCol div.content {
+    text-align: right;
+}
+
 #footer {
     text-align: right;
 }
