@@ -391,7 +391,7 @@ router.get("/zive", function(req, res) {
 
     db.rdb.table("shows").filter({"category":"live"}).orderBy("title").run().then(function(shows) {
         res.render("livestreams", {
-            SubpageTitle: i18n.__('LiveStreams'),
+            SubpageTitle: "Jihomoravský panel 17.11.2020",//i18n.__('LiveStreams'),
             SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
