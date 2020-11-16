@@ -273,7 +273,13 @@ div.rightCol {
     padding-top: 45%;
 }
 
-#listOfShows #playerContainer iframe#player {
+#listOfShows #listopad {
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+}
+
+#listOfShows #playerContainer iframe#player, #listOfShows #listopad iframe#slido {
     border: none;
     position: absolute;
     top: 0;
