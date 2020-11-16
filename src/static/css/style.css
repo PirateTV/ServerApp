@@ -382,6 +382,9 @@ div.rightCol {
 
 #bottomlinks div.rightCol div.content {
     text-align: right;
+    position: relative;
+    right: 0;
+    margin-top: 20px;
 }
 
 #footer {
