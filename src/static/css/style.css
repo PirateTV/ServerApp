@@ -10,8 +10,12 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: #efefef;
+    background: url("/images/denim/denim.png") repeat;
     font-family: 'Open Sans', sans-serif;
+}
+
+#about, #listOfShows {
+    background: #efefef;
 }
 
 #links {
