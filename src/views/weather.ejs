@@ -15,12 +15,23 @@
         </div>
 
         <div class="weatherFrame">
-            <div class="content">
+            <!--<div class="content">-->
                 <iframe src="https://www.ventusky.com/"></iframe>
-            </div>
+            <!--</div>-->
         </div>
     </div>
 
     <% include partials/footer %>
+
+    <script type="text/javascript">
+    $('.weatherFrame').click(function () {
+        $('.weatherFrame iframe').css("pointer-events", "auto");
+    });
+
+    $('.weatherFrame').mouseleave(function() {
+        $('.weatherFrame iframe').css("pointer-events", "none"); 
+    });
+
+    </script>
 </body>
 </html>

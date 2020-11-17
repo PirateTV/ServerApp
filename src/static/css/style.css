@@ -365,7 +365,8 @@ div.rightCol {
 #weather iframe {
     width: 100%;
     border: none;
-    height: 800px
+    height: 800px;
+    pointer-events: none;
 }
 
 #about {
