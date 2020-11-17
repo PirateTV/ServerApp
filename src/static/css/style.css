@@ -604,6 +604,12 @@ div.rightCol {
     }
 }
 
+@media all and (max-width: 800px) {
+    #listOfShows #listopad {
+        height: 900px;
+    }
+}
+
 @media all and (max-width: 680px) {
     #listOfShows .shows .item {
         display: block;
