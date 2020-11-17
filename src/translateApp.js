@@ -40,6 +40,7 @@ module.exports.translateApplication = function translateApplication(app) {
         ReadMore: i18n.__('ReadMore'),
         SourceLink: i18n.__('SourceLink'),
         Published: i18n.__('Published'),
-        MoviesDescription: i18n.__('MoviesDescription')
+        MoviesDescription: i18n.__('MoviesDescription'),
+        ShowMoreOnYT: i18n.__('ShowMoreOnYT')
     });
 }
