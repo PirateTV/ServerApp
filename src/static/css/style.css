@@ -27,9 +27,14 @@ html, body {
     margin: 0 1em 0 0;
 }
 
-#links span a {
+#links span a:link, #links span a:visited {
     text-decoration: none;
-    
+    color: #ffffff;
+}
+
+#links span a:hover {
+    background: #ffffff;
+    color: #000000;
 }
 
 #links #ppcz {
