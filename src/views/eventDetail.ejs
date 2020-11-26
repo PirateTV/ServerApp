@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <!-- Page content START -->
+    <div id="listOfShows">
+        <div class="title redBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div id="playerContainer" class="youtube">
+        <% if(ShowDetails.onAir || ShowDetails.slido == "") { %>
+            <iframe id="player" src="https://www.youtube.com/embed/<%= ShowDetails.youtube %>?autoplay=1" frameborder=”0″ allowfullscreen></iframe>
+        </div>
+        <div id="slidoBlock">
+        <% } %>
+            <% if(ShowDetails.slido != "") { %>
+            <iframe id="slido" src="https://app.sli.do/event/<%= ShowDetails.slido %>/live/questions?lang=cs_CZ" frameborder=”0″></iframe>
+            <% } %>
+        </div>
+
+        <script type="text/javascript">
+            showPlyrYT();
+
+            $(function() {
+                if($("#slido").length == 0) {
+                    $("#slidoBlock").css("height", "0px");
+                }
+            });
+        </script>
+
+    </div>
+    <!-- Page content END -->
+
+    <% include partials/footer %>
+</body>
+</html>

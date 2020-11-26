@@ -278,13 +278,13 @@ div.rightCol {
     padding-top: 45%;
 }
 
-#listOfShows #listopad {
+#listOfShows #slidoBlock {
     position: relative;
     overflow: hidden;
     height: 600px;
 }
 
-#listOfShows #playerContainer iframe#player, #listOfShows #listopad iframe#slido {
+#listOfShows #playerContainer iframe, #listOfShows #slidoBlock iframe#slido {
     border: none;
     position: absolute;
     top: 0;
@@ -535,6 +535,11 @@ div.rightCol {
 
 .orangeBg {
     background: var(--orange);
+}
+
+.gray {
+    color: #aaaaaa;
+    font-weight: 400;
 }
 
 .title h1 {

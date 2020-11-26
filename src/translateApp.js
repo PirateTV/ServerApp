@@ -41,6 +41,11 @@ module.exports.translateApplication = function translateApplication(app) {
         SourceLink: i18n.__('SourceLink'),
         Published: i18n.__('Published'),
         MoviesDescription: i18n.__('MoviesDescription'),
-        ShowMoreOnYT: i18n.__('ShowMoreOnYT')
+        ShowMoreOnYT: i18n.__('ShowMoreOnYT'),
+        EventStart: i18n.__('EventStart'),
+        OnAirEvents: i18n.__('OnAirEvents'),
+        UpcomingEvents: i18n.__('UpcomingEvents'),
+        NoOnAirEvents: i18n.__('NoOnAirEvents'),
+        NoUpcomingEvents: i18n.__('NoUpcomingEvents')
     });
 }

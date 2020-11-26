@@ -389,14 +389,50 @@ router.get("/404", function(req, res) {
 router.get("/zive", function(req, res) {
     saveClientLog(req);
 
-    db.rdb.table("shows").filter({"category":"live"}).orderBy("title").run().then(function(shows) {
-        res.render("livestreams", {
-            SubpageTitle: "Jihomoravský panel 17.11.2020",//i18n.__('LiveStreams'),
-            SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
-            SubpageCover: "https://piratskatelevize.cz/images/icon.png",
-            SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-            StreamYT: shows[0].youtube
+    // select all events one day old max and onAir
+    db.rdb.table("events").filter(db.rdb.row("onAir").eq(true).and(db.rdb.row("eventStart").ge(db.rdb.now().sub(24*60*60)))).orderBy("eventStart").run().then(function(onAirShows) {
+        // select all upcoming events not onAir
+        db.rdb.table("events").filter(db.rdb.row("onAir").eq(false).and(db.rdb.row("eventStart").ge(db.rdb.now().sub(60*60)))).orderBy("eventStart").run().then(function(upcomingShows) {
+            res.render("events", {
+                SubpageTitle: i18n.__('LiveStreams'),
+                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageCover: "https://piratskatelevize.cz/images/icon.png",
+                SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+                OnAirShows: onAirShows,
+                UpcomingShows: upcomingShows,
+                SanitizeStringToUrl: function(str) {
+                    return sanitizeStringToUrl(str);
+                }
+            });
         });
+    });
+});
+
+router.get("/zive/:event", function(req, res) {
+    saveClientLog(req);
+
+    db.rdb.table("events").orderBy("eventStart").run().then(function(shows) {
+        show = shows.find(function(elem) {
+            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.event);
+        });
+        if(show == null || show.length <= 0) {
+            res.redirect("/404");
+        }
+        else {
+            var views = 1;
+            if(show.views != null) {
+                views = show.views + 1;
+            }
+            db.rdb.table("events").get(show.id).update({"views": views}).run();
+
+            res.render("eventDetail", {
+                SubpageTitle: show.title,
+                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageCover: "https://piratskatelevize.cz/images/icon.png",
+                SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+                ShowDetails: show,
+            });
+        }
     });
 });
 
