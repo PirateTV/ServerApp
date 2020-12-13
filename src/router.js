@@ -360,7 +360,7 @@ router.get("/o-nas", function(req, res) {
     saveClientLog(req);
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
-        var feeds = [["Pirátské listy - články", "https://www.piratskelisty.cz/rss/"], ["Pirátské listy - aktuality","https://www.piratskelisty.cz/rss/aktuality"]];
+        var feeds = [["Pirátské listy - články", "https://www.piratskelisty.cz/rss/"], ["Pirátské listy - aktuality","https://www.piratskelisty.cz/rss/aktuality"], ["Public Domain Movies", "http://publicdomainmovies.net/"]];
         for(var i=0; i<shows.length; i++) {
             feeds.push([shows[i].title, getYoutubeFeed(shows[i].youtube)]);
         }
