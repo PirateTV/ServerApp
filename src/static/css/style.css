@@ -616,8 +616,30 @@ div.rightCol {
     display: none;
 }
 
+#freeComponents, #usedSources, #forDownload {
+    margin-top: -0.7em;
+    /*display: none;*/
+}
+
+#freeComponents li, #usedSources li, #forDownload li {
+    list-style-type: square;
+}
+
+#contact {
+    margin-top: -0.7em;
+    padding-left: 1.5em;
+}
+
 #headerSpacer {
     height: 0;
+}
+
+#about .content {
+    padding-bottom: 1em;
+}
+
+#about .content h2 {
+    color: #666666;
 }
 
 @media all and (max-width: 1600px) {

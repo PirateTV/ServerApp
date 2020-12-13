@@ -55,7 +55,7 @@ router.get("/", function(req, res) {
                 // After last key is exposed, render the page content
                 res.render("home", {
                     SubpageTitle: i18n.__('Home'),
-                    SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                    SubpageDescription: i18n.__('GlobalSiteDescription'),
                     SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                     SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                     RssTopics: mergedTopics,
@@ -88,7 +88,7 @@ router.get("/porady", function(req, res) {
         genres = genres.filter(distinct).sort();
         res.render("shows", {
             SubpageTitle: i18n.__('Shows'),
-            SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+            SubpageDescription: i18n.__('GlobalSiteDescription'),
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
             Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
@@ -131,7 +131,7 @@ router.get("/porady/:genre", function(req, res) {
 
             res.render("shows", {
                 SubpageTitle: i18n.__('Shows'),
-                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageDescription: i18n.__('GlobalSiteDescription'),
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
@@ -177,7 +177,7 @@ router.get("/regiony", function(req, res) {
 
         res.render("regions", {
             SubpageTitle: i18n.__('Regions'),
-            SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+            SubpageDescription: i18n.__('GlobalSiteDescription'),
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
             Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
@@ -219,7 +219,7 @@ router.get("/regiony/:genre", function(req, res) {
 
             res.render("regions", {
                 SubpageTitle: i18n.__('Regions'),
-                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageDescription: i18n.__('GlobalSiteDescription'),
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
@@ -267,7 +267,7 @@ router.get("/filmy", function(req, res) {
 
         res.render("movies", {
             SubpageTitle: i18n.__('Movies'),
-            SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+            SubpageDescription: i18n.__('GlobalSiteDescription'),
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
             ShowsList: shows,
@@ -317,7 +317,7 @@ router.get("/filmy/:genre", function(req, res) {
 
             res.render("movies", {
                 SubpageTitle: i18n.__('Movies'),
-                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageDescription: i18n.__('GlobalSiteDescription'),
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 ShowsList: show,
@@ -376,7 +376,7 @@ router.get("/pocasi", function(req, res) {
 
     res.render("weather", {
         SubpageTitle: i18n.__('Weather'),
-        SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+        SubpageDescription: i18n.__('GlobalSiteDescription'),
         SubpageCover: "https://piratskatelevize.cz/images/icon.png",
         SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
     });
@@ -393,7 +393,7 @@ router.get("/o-nas", function(req, res) {
 
         res.render("about", {
             SubpageTitle: i18n.__('About'),
-            SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+            SubpageDescription: i18n.__('GlobalSiteDescription'),
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
             Feeds: feeds,
@@ -406,7 +406,7 @@ router.get("/404", function(req, res) {
 
     res.render("404", {
         SubpageTitle: i18n.__('404-NotFound'),
-        SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+        SubpageDescription: i18n.__('GlobalSiteDescription'),
         SubpageCover: "https://piratskatelevize.cz/images/icon.png",
         SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
     });
@@ -421,7 +421,7 @@ router.get("/zive", function(req, res) {
         db.rdb.table("events").filter(db.rdb.row("onAir").eq(false).and(db.rdb.row("eventStart").ge(db.rdb.now().sub(60*60)))).orderBy("eventStart").run().then(function(upcomingShows) {
             res.render("events", {
                 SubpageTitle: i18n.__('LiveStreams'),
-                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageDescription: i18n.__('GlobalSiteDescription'),
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 OnAirShows: onAirShows,
@@ -453,7 +453,7 @@ router.get("/zive/:event", function(req, res) {
 
             res.render("eventDetail", {
                 SubpageTitle: show.title,
-                SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+                SubpageDescription: i18n.__('GlobalSiteDescription'),
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 ShowDetails: show,

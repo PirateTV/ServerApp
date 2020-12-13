@@ -35,7 +35,10 @@ module.exports.translateApplication = function translateApplication(app) {
             UsedSources: i18n.__('UsedSources'),
             Description: i18n.__('PortalDescription'),
             Note: i18n.__('Note'),
-            Author: i18n.__('Author')
+            Author: i18n.__('Author'),
+            ForDownload: i18n.__('ForDownload'),
+            Contact: i18n.__('Contact'),
+            ContactContent: i18n.__('ContactContent')
         },
         ReadMore: i18n.__('ReadMore'),
         SourceLink: i18n.__('SourceLink'),
@@ -46,6 +49,6 @@ module.exports.translateApplication = function translateApplication(app) {
         OnAirEvents: i18n.__('OnAirEvents'),
         UpcomingEvents: i18n.__('UpcomingEvents'),
         NoOnAirEvents: i18n.__('NoOnAirEvents'),
-        NoUpcomingEvents: i18n.__('NoUpcomingEvents')
+        NoUpcomingEvents: i18n.__('NoUpcomingEvents'),
     });
 }

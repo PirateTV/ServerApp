@@ -34,5 +34,9 @@
 	"OnAirEvents": "Probíhající vysílání",
 	"UpcomingEvents": "Naplánováná vysílání",
 	"NoOnAirEvents": "Momentálně neprobíhá žádné vysílání.",
-	"NoUpcomingEvents": "Momentálně není naplánováno žádné vysílání."
+	"NoUpcomingEvents": "Momentálně není naplánováno žádné vysílání.",
+	"GlobalSiteDescription": "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
+	"ForDownload": "Ke stažení",
+	"Contact": "Kontakt",
+	"ContactContent": "e-mail: <a href=\"mailto:piratska.televize@gmail.com\">piratska.televize@gmail.com</a>"
 }
