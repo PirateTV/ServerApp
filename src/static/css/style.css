@@ -120,6 +120,10 @@ div.rightCol {
     border-bottom: solid 2px var(--green);
 }
 
+#listOfShows {
+    padding-bottom: 1em;
+}
+
 #listOfShows .title {
     padding: 1em 0 1em 0;
     color: #ffffff;
@@ -409,6 +413,10 @@ div.rightCol {
     width: 600px;
 }
 
+#topics {
+    padding-bottom: 2em;
+}
+
 #topics .title {
     padding: 1em 0 1em 0;
     color: #ffffff;
@@ -559,6 +567,10 @@ div.rightCol {
 .readMore {
     font-style: italic;
     font-size: 10pt !important;
+}
+
+.h1smaller {
+    font-size: 16pt;
 }
 
 #facebook, #youtube {
