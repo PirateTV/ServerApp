@@ -8,6 +8,19 @@ var EventEmitter = require("events").EventEmitter;
 var parser = require('xml2js').Parser({ attrkey: "ATTR" });
 var getThumb = require('video-thumbnail-url');
 var geoip = require('geoip-lite');
+const urlMetadata = require('url-metadata');
+
+async function getUrlPreview(url) {
+    return (
+        await urlMetadata(url).then(
+            function (metadata) { // success handler
+                return metadata['og:image'];
+            },
+            function (error) { // failure handler
+                console.log(error);
+                return undefined;
+    }));            
+};
 
 // Dynamic endpoints
 router.get("/", function(req, res) {
@@ -22,17 +35,30 @@ router.get("/", function(req, res) {
         Feed.load('https://www.piratskelisty.cz/rss/', function(err, rss) {
             Feed.load('https://www.piratskelisty.cz/rss/aktuality', function(err, rss1) {
                 var mergedTopics = rss.items.concat(rss1.items);
+                mergedTopics.sort(function(a, b) {
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                    return new Date(b.pubDate) - new Date(a.pubDate);
+                });
+                mergedTopics = mergedTopics.slice(0,6);
+                
+                // Get feed image previews
+                /*var keys=Object.keys(mergedTopics);
+                for(var i = 0; i < keys.length - 1; i++) {
+                    getUrlPreview(mergedTopics[i].link).then(imageUrl => {
+                        console.log(imageUrl);
+                        mergedTopics[i].image = imageUrl;
+                        console.log(mergedTopics[i]);
+                    });
+                };*/
 
+                // After last key is exposed, render the page content
                 res.render("home", {
                     SubpageTitle: i18n.__('Home'),
                     SubpageDescription: "Tento portál slouží k agregaci veřejného audiovizuálního obsahu tvořeného členy České pirátské strany v rámci své politické činnosti.",
                     SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                     SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-                    RssTopics: mergedTopics.sort(function(a, b) {
-                        // Turn your strings into dates, and then subtract them
-                        // to get a value that is either negative, positive, or zero.
-                        return new Date(b.pubDate) - new Date(a.pubDate);
-                    }).slice(0,6),
+                    RssTopics: mergedTopics,
                     FormatDateTimeToCZ: function(str) {
                         return formatDateTimeToCZ(str);
                     },
