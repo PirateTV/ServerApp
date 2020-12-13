@@ -329,7 +329,7 @@ router.get("/film/:showMovie", function(req, res) {
             }
             db.rdb.table("shows").get(show.id).update({"views": views}).run();
 
-            console.log(show.youtube == null ? "" : show.youtube);
+            console.log(show.youtube == null ? show.video : show.youtube);
             res.render("movieDetail", {
                 SubpageTitle: show.title,
                 SubpageDescription: show.description,
