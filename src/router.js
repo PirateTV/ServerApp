@@ -26,46 +26,51 @@ async function getUrlPreview(url) {
 router.get("/", function(req, res) {
     saveClientLog(req);
 
-    // Load most viewed shows
+    // Load most watched shows
     db.rdb.table("shows").filter({"category":"show"}).orderBy(db.rdb.desc("views")).run().then(function(shows) {
         shows = shows.filter(function(elem) {
             return (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Kraje")) && (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Regiony"));
         });
-        // Load topics from news
-        Feed.load('https://www.piratskelisty.cz/rss/', function(err, rss) {
-            Feed.load('https://www.piratskelisty.cz/rss/aktuality', function(err, rss1) {
-                var mergedTopics = rss.items.concat(rss1.items);
-                mergedTopics.sort(function(a, b) {
-                    // Turn your strings into dates, and then subtract them
-                    // to get a value that is either negative, positive, or zero.
-                    return new Date(b.pubDate) - new Date(a.pubDate);
-                });
-                mergedTopics = mergedTopics.slice(0,6);
-                
-                // Get feed image previews
-                /*var keys=Object.keys(mergedTopics);
-                for(var i = 0; i < keys.length - 1; i++) {
-                    getUrlPreview(mergedTopics[i].link).then(imageUrl => {
-                        console.log(imageUrl);
-                        mergedTopics[i].image = imageUrl;
-                        console.log(mergedTopics[i]);
-                    });
-                };*/
 
-                // After last key is exposed, render the page content
-                res.render("home", {
-                    SubpageTitle: i18n.__('Home'),
-                    SubpageDescription: i18n.__('GlobalSiteDescription'),
-                    SubpageCover: "https://piratskatelevize.cz/images/icon.png",
-                    SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-                    RssTopics: mergedTopics,
-                    FormatDateTimeToCZ: function(str) {
-                        return formatDateTimeToCZ(str);
-                    },
-                    MostWatchedShows: shows.slice(0,4),
-                    SanitizeStringToUrl: function(str) {
-                        return sanitizeStringToUrl(str);
-                    },
+        // Load most watched movies
+        db.rdb.table("shows").filter({"category":"movie"}).orderBy(db.rdb.desc("views")).run().then(function(movies) {
+            // Load topics from news
+            Feed.load('https://www.piratskelisty.cz/rss/', function(err, rss) {
+                Feed.load('https://www.piratskelisty.cz/rss/aktuality', function(err, rss1) {
+                    var mergedTopics = rss.items.concat(rss1.items);
+                    mergedTopics.sort(function(a, b) {
+                        // Turn your strings into dates, and then subtract them
+                        // to get a value that is either negative, positive, or zero.
+                        return new Date(b.pubDate) - new Date(a.pubDate);
+                    });
+                    mergedTopics = mergedTopics.slice(0,6);
+                    
+                    // Get feed image previews
+                    /*var keys=Object.keys(mergedTopics);
+                    for(var i = 0; i < keys.length - 1; i++) {
+                        getUrlPreview(mergedTopics[i].link).then(imageUrl => {
+                            console.log(imageUrl);
+                            mergedTopics[i].image = imageUrl;
+                            console.log(mergedTopics[i]);
+                        });
+                    };*/
+
+                    // After last key is exposed, render the page content
+                    res.render("home", {
+                        SubpageTitle: i18n.__('Home'),
+                        SubpageDescription: i18n.__('GlobalSiteDescription'),
+                        SubpageCover: "https://piratskatelevize.cz/images/icon.png",
+                        SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+                        RssTopics: mergedTopics,
+                        FormatDateTimeToCZ: function(str) {
+                            return formatDateTimeToCZ(str);
+                        },
+                        MostWatchedShows: shows.slice(0,4),
+                        MostWatchedMovies: movies.slice(0,8),
+                        SanitizeStringToUrl: function(str) {
+                            return sanitizeStringToUrl(str);
+                        },
+                    });
                 });
             });
         });
@@ -313,7 +318,6 @@ router.get("/filmy/:genre", function(req, res) {
                     }
                 }
             }
-
 
             res.render("movies", {
                 SubpageTitle: i18n.__('Movies'),

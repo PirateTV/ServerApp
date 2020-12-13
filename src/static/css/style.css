@@ -5,6 +5,7 @@
     --green: rgb(0, 139, 70);
     --darkBlue: rgb(0, 63, 88);
     --orange: rgb(204, 109, 0);
+    --darkGray: #666666;
 }
 
 html, body {
@@ -120,16 +121,16 @@ div.rightCol {
     border-bottom: solid 2px var(--green);
 }
 
-#listOfShows {
+#listOfShows, #listOfMovies {
     padding-bottom: 1em;
 }
 
-#listOfShows .title {
+#listOfShows .title, #listOfMovies .title {
     padding: 1em 0 1em 0;
     color: #ffffff;
 }
 
-#listOfShows .title p {
+#listOfShows .title p, #listOfMovies .title p {
     font-style: italic;
     font-size: 10.5pt;
 }
@@ -197,12 +198,12 @@ div.rightCol {
     margin: 0 0.5em 0 0.5em;
 }
 
-#listOfShows .shows {
+#listOfShows .shows, #listOfMovies .shows {
     padding: 1em 0 1em 0;
     text-align: center;
 }
 
-#listOfShows .shows .item {
+#listOfShows .shows .item, #listOfMovies .shows .item {
     display: inline-block;
 
     width: 290px;
@@ -230,7 +231,7 @@ div.rightCol {
     border-bottom: solid 2px var(--blue);
 }
 
-#listOfShows .shows .purpleUnderline:hover {
+#listOfShows .shows .purpleUnderline:hover, #listOfMovies .shows .item:hover {
     border-bottom: solid 2px var(--purple);
 }
 
@@ -242,7 +243,7 @@ div.rightCol {
     border-bottom: solid 2px var(--orange);
 }
 
-#listOfShows .shows .item img {
+#listOfShows .shows .item img, #listOfMovies .shows .item img {
     width: 290px;
 
     -webkit-border-top-left-radius: 5px;
@@ -253,7 +254,7 @@ div.rightCol {
     border-top-right-radius: 5px; 
 }
 
-#listOfShows .shows .item h2 {
+#listOfShows .shows .item h2, #listOfMovies .shows .item h2 {
     margin: 0.5em 1em 0.5em 1em;
     padding: 0;
     font-weight: 600;
@@ -261,7 +262,7 @@ div.rightCol {
     height: 50px;
 }
 
-#listOfShows .shows .item .author {
+#listOfShows .shows .item .author, #listOfMovies .shows .item .author {
     display: block;
     margin: 0 1em 1em 1.5em;
     font-size: 8.5pt;
@@ -271,7 +272,7 @@ div.rightCol {
     height: auto;
 }
 
-#listOfShows .detail .item h2 {
+#listOfShows .detail .item h2, #listOfMovies .shows .item h2 {
     min-height: 50px;
     height: auto;
 }
@@ -420,7 +421,7 @@ div.rightCol {
 #topics .title {
     padding: 1em 0 1em 0;
     color: #ffffff;
-    background: #999999;
+    background: var(--darkGray);
 }
 
 #topics .title h1 a {
@@ -465,7 +466,7 @@ div.rightCol {
 }
 
 #topics .item p {
-    font-size: 11pt;
+    font-size: 10.5pt;
     padding: 0.5em 1em 0.5em 1em;
     margin: 0;
     color: #000000;
@@ -485,11 +486,11 @@ div.rightCol {
 }
 
 #topics .item:hover {
-    border-bottom: solid 2px var(--blue);
+    border-bottom: solid 2px var(--darkGray);
 }
 
 #topics .item:hover h1 {
-    background: var(--blue);
+    background: var(--darkGray);
 }
 
 #about .content h2 {
@@ -662,16 +663,16 @@ div.rightCol {
 }
 
 @media all and (max-width: 680px) {
-    #listOfShows .shows .item {
+    #listOfShows .shows .item, #listOfMovies .shows .item {
         display: block;
         margin: 1em auto 1em auto;
     }
 
-    #listOfShows .shows .item, #listOfShows .shows .item img {
+    #listOfShows .shows .item, #listOfMovies .shows .item, #listOfShows .shows .item img, #listOfMovies .shows .item img {
         width: 360px;
     }
 
-    #listOfShows .shows .item h2 {
+    #listOfShows .shows .item h2, #listOfMovies .shows .item h2 {
         min-height: 50px;
         height: auto;
     }
@@ -740,7 +741,7 @@ div.rightCol {
         width: 250px;
     }
 
-    #listOfShows .shows .item, #listOfShows .shows .item img {
+    #listOfShows .shows .item, #listOfMovies .shows .item, #listOfShows .shows .item img, #listOfMovies .shows .item img {
         max-width: 220px;
     }
 }

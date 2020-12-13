@@ -18,6 +18,7 @@ module.exports.translateApplication = function translateApplication(app) {
             Regions: i18n.__('Regions')
         },
         MostWatched: i18n.__('MostWatched'),
+        MostWatchedMoviesLbl: i18n.__('MoviesWatched'),
         Newest: i18n.__('Newest'),
         Alphabetical: i18n.__('Alphabetical'),
         ByGenre: i18n.__('ByGenre'),
