@@ -573,6 +573,10 @@ div.rightCol {
     font-size: 16pt;
 }
 
+.redText {
+    color: var(--red);
+}
+
 #facebook, #youtube {
     width: 32px;
     height: 32px;
