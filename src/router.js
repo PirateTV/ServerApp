@@ -362,7 +362,7 @@ router.get("/film/:showMovie", function(req, res) {
             console.log(show.youtube == null ? show.video : show.youtube);
             res.render("movieDetail", {
                 SubpageTitle: show.title,
-                SubpageDescription: show.description,
+                SubpageDescription: show.description.replace(/(<([^>]+)>)/gi, ""),
                 SubpageCover: show.cover,
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 ShowDetails: show,
@@ -585,7 +585,7 @@ function showEpisode(req, res, renderPage = "showDetail") {
                 else {
                     res.render(renderPage, {
                         SubpageTitle: show.title,
-                        SubpageDescription: x()['media:group'][0]['media:description'][0].slice(0, 160) + "(...)",
+                        SubpageDescription: (x()['media:group'][0]['media:description'][0].slice(0, 160) + "(...)").replace(/(<([^>]+)>)/gi, ""),
                         SubpageCover: x()['media:group'][0]['media:thumbnail'][0].ATTR.url,
                         SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                         ShowDetails: show,
