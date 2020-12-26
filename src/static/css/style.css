@@ -365,6 +365,7 @@ div.rightCol {
 
 #weather .weatherFrame {
     max-height: 800px;
+    position: relative;
 }
 
 #weather iframe {
@@ -641,6 +642,28 @@ div.rightCol {
 
 #about .content h2 {
     color: #666666;
+}
+
+#scrollInfo {
+    display: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+}
+
+#scrollInfo span {
+    color: #ffffff;
+    font-size: 16pt;
+    font-weight: 300;
+    display: block;
+    position: relative;
+    top: 49%;
 }
 
 @media all and (max-width: 1600px) {

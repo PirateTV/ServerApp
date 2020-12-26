@@ -51,5 +51,6 @@ module.exports.translateApplication = function translateApplication(app) {
         UpcomingEvents: i18n.__('UpcomingEvents'),
         NoOnAirEvents: i18n.__('NoOnAirEvents'),
         NoUpcomingEvents: i18n.__('NoUpcomingEvents'),
+        ScrollInfoText: i18n.__('ScrollInfoText'),
     });
 }
