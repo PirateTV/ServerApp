@@ -458,7 +458,7 @@ router.get("/zive/:event", function(req, res) {
             res.render("eventDetail", {
                 SubpageTitle: show.title,
                 SubpageDescription: i18n.__('GlobalSiteDescription'),
-                SubpageCover: "https://piratskatelevize.cz/images/icon.png",
+                SubpageCover: (show.cover == "") ? "https://piratskatelevize.cz/images/icon.png" : show.cover,
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 ShowDetails: show,
             });
