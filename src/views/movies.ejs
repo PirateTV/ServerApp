@@ -53,7 +53,7 @@
                     <h1 id="<%= Letters[j] %>"><%= Letters[j] %></h1>
                     <% } %>
                         <% for(let i = 0; i < AlphaTitles(Letters[j]).length; i++) { %>
-                        <a href="/film/<%= SanitizeStringToUrl(AlphaTitles(Letters[j])[i].title) %>" class="item purpleUnderline">
+                        <a href="/film/<%= SanitizeStringToUrl(AlphaTitles(Letters[j])[i].title) %>/<%= AlphaTitles(Letters[j])[i].id %>" class="item purpleUnderline">
                             <img src="<%= AlphaTitles(Letters[j])[i].cover %>" alt="<%= AlphaTitles(Letters[j])[i].title %>" />
                             <h2><%= AlphaTitles(Letters[j])[i].title %></h2>
                             <span class="author"><%= AlphaTitles(Letters[j])[i].author %></span>

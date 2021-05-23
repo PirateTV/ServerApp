@@ -344,11 +344,21 @@ router.get("/filmy/:genre", function(req, res) {
 });
 
 router.get("/film/:showMovie", function(req, res) {  
+    res.redirect("/film/" + req.params.showMovie + "/movie");
+});
+
+router.get("/film/:showMovie/:movieId", function(req, res) {  
     saveClientLog(req);
 
     db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
         show = shows.find(function(elem) {
-            return helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.showMovie);
+            if(req.params.movieId == "movie") {
+                return (helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.showMovie));
+            }
+            else {
+                return (helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.showMovie) && elem.id == req.params.movieId);
+            }
+            
         });
         if(show == null || show.length <= 0) {
             res.redirect("/404");
@@ -469,12 +479,16 @@ router.get("/zive/:eventTitle/:eventId", function(req, res) {
             }
             db.rdb.table("events").get(show.id).update({"views": views}).run();
 
-            res.render("eventDetail", {
-                SubpageTitle: show.title,
-                SubpageDescription: i18n.__('GlobalSiteDescription'),
-                SubpageCover: (show.cover == "") ? "https://piratskatelevize.cz/images/icon.png" : show.cover,
-                SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
-                ShowDetails: show,
+            db.rdb.table("users").get(show.author).run().then(function(author) {
+                log.log(author.fullname);
+                res.render("eventDetail", {
+                    SubpageTitle: show.title,
+                    SubpageDescription: i18n.__('GlobalSiteDescription'),
+                    SubpageCover: (show.cover == "") ? "https://piratskatelevize.cz/images/icon.png" : show.cover,
+                    SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
+                    ShowDetails: show,
+                    EventAuthor: author
+                });
             });
         }
     });

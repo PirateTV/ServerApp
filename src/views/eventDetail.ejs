@@ -25,6 +25,10 @@
             <iframe id="slido" src="https://app.sli.do/event/<%= ShowDetails.slido %>/live/questions?lang=cs_CZ" frameborder=”0″></iframe>
             <% } %>
         </div>
+        <div id="showDescription" class="eventAuthor">
+            <%= Author %><a href="mailto:<%= EventAuthor.email %>"><%= EventAuthor.fullname %></a><br />
+            <%= EventPlannedStart %><%= ShowDetails.eventStart %>
+        </div>
 
         <script type="text/javascript">
             showPlyrYT();

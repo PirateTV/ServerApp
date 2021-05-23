@@ -780,6 +780,11 @@ div.rightCol {
     top: 49%;
 }
 
+#showDescription.eventAuthor {
+    padding: 2em;
+    background: none;
+}
+
 @media all and (max-width: 1600px) {
     div.content {
         margin: auto 6em auto 6em;

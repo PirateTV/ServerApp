@@ -55,6 +55,7 @@ module.exports.translateApplication = function translateApplication(app) {
         MenuAdmin: {
             LiveStreams: i18n.__('AdminLiveStreams'),
             Logout: i18n.__('AdminLogout'),
+            Movies: i18n.__('AdminMovies')
         },
         AdminDashboard: {
             MyEvents: i18n.__('MyEvents'),
@@ -67,8 +68,10 @@ module.exports.translateApplication = function translateApplication(app) {
             EventUpdate: i18n.__('EventUpdate'),
             EventDelete: i18n.__('EventDelete'),
             EventDeleteConfirmation: i18n.__('EventDeleteConfirmation'),
-            EditCreateEvent: i18n.__('EditCreateEvent'),
+            EventEdit: i18n.__('EventEdit'),
             EventCreateNew: i18n.__('EventCreateNew')
         },
+        Author: i18n.__('Author'),
+        EventPlannedStart: i18n.__('EventPlannedStart')
     });
 }

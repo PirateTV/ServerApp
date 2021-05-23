@@ -61,6 +61,7 @@ router.get("/events/:eventId", auth.isAuthorized, function(req, res, next) {
     if(req.params.eventId == "createNew") {
         res.render("admin_eventUpdate", {
             SubpageTitle: i18n.__('AdminLiveStreams'),
+            EventAction: i18n.__('EventCreateNew'),
             SubpageDescription: i18n.__('GlobalSiteDescription'),
             SubpageCover: "https://piratskatelevize.cz/images/icon.png",
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
@@ -75,6 +76,7 @@ router.get("/events/:eventId", auth.isAuthorized, function(req, res, next) {
         db.rdb.table("events").filter((req.session.type == "administrator") ? {"id":req.params.eventId} : {"id":req.params.eventId, "author":req.session.userId}).run().then(function(onAirShows) {
             res.render("admin_eventUpdate", {
                 SubpageTitle: i18n.__('AdminLiveStreams'),
+                EventAction: i18n.__('EventEdit'),
                 SubpageDescription: i18n.__('GlobalSiteDescription'),
                 SubpageCover: "https://piratskatelevize.cz/images/icon.png",
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
@@ -115,7 +117,8 @@ router.post("/events/:eventId", auth.isAuthorized, function(req, res, next) {
                 "eventStart":req.body.eventStart,
                 "youtube":req.body.eventYoutubeUrl,
                 "slido":req.body.eventSlidoUrl,
-                "onAir":(req.body.eventOnAir == "checked" ? true : false)
+                "onAir":(req.body.eventOnAir == "checked" ? true : false),
+                "author":req.session.userId
             }).run().then(function() {
                 res.redirect("/tajemstvi/events/" + req.params.eventId);
             });
