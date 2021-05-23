@@ -532,6 +532,10 @@ div.rightCol {
     padding: 1em 0 1em 0;
 }
 
+#adminDashboard {
+    padding-bottom: 4em;
+}
+
 #myEvents {
     width:            100%;
     margin:           auto;
