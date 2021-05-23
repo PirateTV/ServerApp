@@ -42,7 +42,7 @@
 	"MoviesWatched": "Osm nejsledovanějších svobodných filmů",
 	"ScrollInfoText": "Pro přiblížení nebo zobrazení jiných vrstev počasí klikněte do mapy.",
 	"NonAuthorizedAccess": "Pro zobrazení této části se musíte přihlásit.",
-	"Login": "Přihlášení k administraci portálu",
+	"Login": "Přihlášení",
 	"Email": "E-mail",
 	"LoginSubmit": "Přihlásit se",
 	"LoggedOutMessage": "Úspěšně odhlášeno z eJednání.",
@@ -54,5 +54,15 @@
 	"AdminLiveStreams": "Správa živých přenosů",
 	"AdminLogout": "Odhlásit se",
 	"PortalAdministration": "Administrace portálu",
-	"MyLiveStreams": "Mnou plánovaná živá vysílání"
+	"MyEvents": "Moje živé přenosy",
+	"EventTitle": "Název přenosu",
+	"EventCover": "Úvodní fotka",
+	"EventYoutubeUrl": "YouTube URL",
+	"EventSlidoUrl": "Slido URL",
+	"EventOnAir": "Vysíláme?",
+	"EventUpdate": "Upravit",
+	"EventDelete": "Odstranit",
+	"EventDeleteConfirmation": "Opravdu chcete odstranit tento přenos?",
+	"EditCreateEvent": "Upravit stávající či naplánovat nový přenos",
+	"EventCreateNew": "Naplánovat nový přenos"
 }

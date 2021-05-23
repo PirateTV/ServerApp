@@ -101,3 +101,10 @@ module.exports.sendMail = function sendMail(to, subject, text) {
         }
       }); 
 }
+
+module.exports.sanitizeStringToUrl = function sanitizeStringToUrl(str) {
+    str = str.toString();
+    str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    str = str.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    return str;
+}

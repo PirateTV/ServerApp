@@ -528,10 +528,86 @@ div.rightCol {
     text-align: center;
 }
 
+#adminDashboard .title {
+    padding: 1em 0 1em 0;
+}
+
+#myEvents {
+    width:            100%;
+    margin:           auto;
+    border-collapse:  collapse;
+    border:           solid 1px var(--red);
+    font-weight:      300;
+}
+  
+#myEvents th {
+    padding:          0.2em;
+    border:           solid 1px #ffffff;
+    height:           2.5em;
+    background-color: var(--red);
+    color:            #ffffff;
+    transition:       all ease-in-out 0.5s;
+    font-weight:      400;
+    font-size:        11pt;
+}
+
+#myEvents th.sorting_desc, #myEvents th.sorting_asc {
+    color:            #ffe600;
+    transition:       all ease-in-out 0.5s;
+}
+
+#myEvents td {
+    padding:          0.5em;
+    border:           solid 1px #ffffff;
+    text-align:       center;
+}
+
+#myEvents td.longCol {
+    width:            350px;
+}
+
+#myEvents td.longCol img {
+    max-width:        250px;
+}
+
+#myEvents td.smallCol {
+    width:            100px;
+}
+
+#myEvents td input {
+    margin:           0;
+    padding:          0.2em;
+    width: 100%;
+}
+
+#myEvents td.center {
+    text-align:       center;
+}
+
+#myEvents tbody tr {
+    transition:       all ease-in-out 0.5s;
+}
+
+#myEvents tr:nth-child(2n+2) {
+    background:       #d2effc;
+}
+
+#myEvents tbody tr:hover {
+    background:       #fcf0b9;
+    transition:       all ease-in-out 0.5s;
+}
+
 #loginContainer input[type="text"] {
     padding: 5px;
     margin: 15px 0 15px 0;
     width: 100%;
+}
+
+#eventCreateNew {
+    width: 350px;
+    height: 100px;
+    margin: 2em 0 2em 0;
+    font-size: 1.6em;
 }
 
 #loginContainer input[type="submit"] {

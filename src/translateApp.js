@@ -17,10 +17,6 @@ module.exports.translateApplication = function translateApplication(app) {
             MeetingRecordings: i18n.__('MeetingRecordings'),
             Regions: i18n.__('Regions')
         },
-        MenuAdmin: {
-            LiveStreams: i18n.__('AdminLiveStreams'),
-            Logout: i18n.__('AdminLogout'),
-        },
         MostWatched: i18n.__('MostWatched'),
         MostWatchedMoviesLbl: i18n.__('MoviesWatched'),
         Newest: i18n.__('Newest'),
@@ -56,8 +52,23 @@ module.exports.translateApplication = function translateApplication(app) {
         NoOnAirEvents: i18n.__('NoOnAirEvents'),
         NoUpcomingEvents: i18n.__('NoUpcomingEvents'),
         ScrollInfoText: i18n.__('ScrollInfoText'),
+        MenuAdmin: {
+            LiveStreams: i18n.__('AdminLiveStreams'),
+            Logout: i18n.__('AdminLogout'),
+        },
         AdminDashboard: {
-            MyLiveStreams: i18n.__('MyLiveStreams'),
+            MyEvents: i18n.__('MyEvents'),
+            EventTitle: i18n.__('EventTitle'),
+            EventCoverUrl: i18n.__('EventCover'),
+            EventStart: i18n.__('EventStart'),
+            EventYoutubeUrl: i18n.__('EventYoutubeUrl'),
+            EventSlidoUrl: i18n.__('EventSlidoUrl'),
+            EventOnAir: i18n.__('EventOnAir'),
+            EventUpdate: i18n.__('EventUpdate'),
+            EventDelete: i18n.__('EventDelete'),
+            EventDeleteConfirmation: i18n.__('EventDeleteConfirmation'),
+            EditCreateEvent: i18n.__('EditCreateEvent'),
+            EventCreateNew: i18n.__('EventCreateNew')
         },
     });
 }

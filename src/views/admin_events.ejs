@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/headAdmin %>
+</head>
+
+<body>
+    <% include partials/headerAdmin %>
+
+    <div id="adminDashboard">
+        <div class="title redBg">
+            <div class="content">
+                <h1 class="whiteText"><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="shows">
+            <div class="content">
+                <input type="button" value="<%= AdminDashboard.EventCreateNew %>" onclick="location.href='<%= SubpageUrl %>/createNew'" id="eventCreateNew" />
+                <h2><%= AdminDashboard.MyEvents %></h2>
+
+                <table id="myEvents">
+                    <thead>
+                        <tr>
+                            <th><%= AdminDashboard.EventTitle %></th>
+                            <th><%= AdminDashboard.EventCoverUrl %></th>
+                            <th><%= AdminDashboard.EventStart %></th>
+                            <th><%= AdminDashboard.EventYoutubeUrl %></th>
+                            <th><%= AdminDashboard.EventSlidoUrl %></th>
+                            <th><%= AdminDashboard.EventOnAir %></th>
+                            <th><%= AdminDashboard.EventUpdate %></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% for(let i = 0; i < OnAirShows.length; i++) { %>
+                        <form method="POST" action="#">
+                            <tr>
+                                <td class="longCol"><%= OnAirShows[i].title %></td>
+                                <td class="longCol">
+                                    <img src="<%= OnAirShows[i].cover %>" alt="<%= OnAirShows[i].title %>" />
+                                </td>
+                                <td class="longCol"><%= OnAirShows[i].eventStart %></td>
+                                <td class="smallCol"><%= OnAirShows[i].youtube %></td>
+                                <td class="smallCol"><%= OnAirShows[i].slido %></td>
+                                <% if(OnAirShows[i].onAir === true) { %>
+                                <td class="smallCol"><input type="checkbox" checked="checked" disabled="disabled" /></td>
+                                <% } else{ %>
+                                <td class="smallCol"><input type="checkbox" disabled="disabled" /></td>
+                                <% } %>
+                                <td class="smallCol">
+                                    <input type="button" value="<%= AdminDashboard.EventUpdate %>" onclick="location.href='<%= SubpageUrl %>/<%= OnAirShows[i].id %>'" /><br />
+                                    <input type="button" value="<%= AdminDashboard.EventDelete %>" onclick="javascript:deleteEventTrigger('<%= OnAirShows[i].id %>', '<%= OnAirShows[i].title %>')" />
+                                </td>
+                            </tr>
+                        </form>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>
+
+    <script type="text/javascript">
+    $(document).ready( function () {
+        $('#myEvents').DataTable( {
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            "order": [[ 1, "asc" ]],
+            stateSave: true
+        } );
+    } );
+
+    function deleteEventTrigger(eventId, eventTitle) {
+        if (confirm('<%= AdminDashboard.EventDeleteConfirmation %>\n' + eventTitle)) {
+            // Save it!
+            location.href='<%= SubpageUrl %>/' + eventId + '/delete';
+        }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/headAdmin %>
+</head>
+
+<body>
+    <% include partials/headerAdmin %>
+
+    <div id="adminDashboard">
+        <div class="title redBg">
+            <div class="content">
+                <h1 class="whiteText"><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="shows">
+            <div class="content">
+                <h2><%= AdminDashboard.EditCreateEvent %></h2>
+                <form method="POST" action="#">
+                    <table id="myEvents">
+                        <tr>
+                            <th><%= AdminDashboard.EventTitle %></th>
+                            <td><input type="text" value="<%= OnAirShow.title %>" id="eventTitle" name="eventTitle" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.EventCoverUrl %></th>
+                            <td>
+                                <img id="coverUrlImg" src="<%= OnAirShow.cover %>" alt="<%= OnAirShow.title %>" />
+                                <input type="text" value="<%= OnAirShow.cover %>" id="coverUrl" name="eventCoverUrl" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.EventStart %></th>
+                            <td><input type="datetime-local" value="<%= OnAirShow.eventStart %>" name="eventStart" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.EventYoutubeUrl %></th>
+                            <td><input type="text" value="<%= OnAirShow.youtube %>" name="eventYoutubeUrl" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.EventSlidoUrl %></th>
+                            <td><input type="text" value="<%= OnAirShow.slido %>" name="eventSlidoUrl" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.EventOnAir %></th>
+                            <td>
+                                <% if(OnAirShow.onAir === true) { %>
+                                <input type="checkbox" checked="checked" value="checked" name="eventOnAir" />
+                                <% } else{ %>
+                                <input type="checkbox" name="eventOnAir" value="" />
+                                <% } %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" value="<%= AdminDashboard.EditCreateEvent %>" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>
+
+    <script type="text/javascript">
+    $(document).ready( function () {
+        $('#coverUrl').on("input", function() {
+            $('#coverUrlImg').attr('src', $('#coverUrl').val());
+        });
+
+        $('#eventTitle').on("input", function() {
+            $('#coverUrlImg').attr('alt', $('#eventTitle').val());
+        });
+    } );
+    </script>
+</body>
+</html>

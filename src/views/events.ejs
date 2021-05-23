@@ -21,7 +21,7 @@
                     <h2 class="gray"><%= NoOnAirEvents %></h2>
                 <% } %>
                 <% for(let i = 0; i < OnAirShows.length; i++) { %>
-                    <a href="/zive/<%= SanitizeStringToUrl(OnAirShows[i].title) %>" class="item redUnderline">
+                    <a href="/zive/<%= SanitizeStringToUrl(OnAirShows[i].title) %>/<%= OnAirShows[i].id %>" class="item redUnderline">
                         <img src="<%= OnAirShows[i].cover %>" alt="<%= OnAirShows[i].title %>" />
                         <h2><%= OnAirShows[i].title %></h2>
                         <span class="author"><%= EventStart %>&nbsp;<%= OnAirShows[i].eventStart %></span>
@@ -33,7 +33,7 @@
                     <h2 class="gray"><%= NoUpcomingEvents %></h2>
                 <% } %>
                 <% for(let i = 0; i < UpcomingShows.length; i++) { %>
-                    <a href="/zive/<%= SanitizeStringToUrl(UpcomingShows[i].title) %>" class="item redUnderline">
+                    <a href="/zive/<%= SanitizeStringToUrl(UpcomingShows[i].title) %>/<%= UpcomingShows[i].id %>" class="item redUnderline">
                         <img src="<%= UpcomingShows[i].cover %>" alt="<%= UpcomingShows[i].title %>" />
                         <h2><%= UpcomingShows[i].title %></h2>
                         <span class="author"><%= EventStart %>&nbsp;<%= UpcomingShows[i].eventStart %></span>

@@ -9,6 +9,8 @@ var parser = require('xml2js').Parser({ attrkey: "ATTR" });
 var getThumb = require('video-thumbnail-url');
 var geoip = require('geoip-lite');
 const urlMetadata = require('url-metadata');
+var helpers = require("./helpers.js");
+var log = require('./log.js');
 
 async function getUrlPreview(url) {
     return (
@@ -29,7 +31,7 @@ router.get("/", function(req, res) {
     // Load most watched shows
     db.rdb.table("shows").filter({"category":"show"}).orderBy(db.rdb.desc("views")).run().then(function(shows) {
         shows = shows.filter(function(elem) {
-            return (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Kraje")) && (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Regiony"));
+            return (helpers.sanitizeStringToUrl(elem.genre) != helpers.sanitizeStringToUrl("Kraje")) && (helpers.sanitizeStringToUrl(elem.genre) != helpers.sanitizeStringToUrl("Regiony"));
         });
 
         // Load most watched movies
@@ -68,7 +70,7 @@ router.get("/", function(req, res) {
                         MostWatchedShows: shows.slice(0,4),
                         MostWatchedMovies: movies.slice(0,8),
                         SanitizeStringToUrl: function(str) {
-                            return sanitizeStringToUrl(str);
+                            return helpers.sanitizeStringToUrl(str);
                         },
                     });
                 });
@@ -82,7 +84,7 @@ router.get("/porady", function(req, res) {
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         shows = shows.filter(function(elem) {
-            return (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Kraje")) && (sanitizeStringToUrl(elem.genre) != sanitizeStringToUrl("Regiony"));
+            return (helpers.sanitizeStringToUrl(elem.genre) != helpers.sanitizeStringToUrl("Kraje")) && (helpers.sanitizeStringToUrl(elem.genre) != helpers.sanitizeStringToUrl("Regiony"));
         });
         // Get list of all genres from db
         var genres = [];
@@ -99,13 +101,13 @@ router.get("/porady", function(req, res) {
             Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
             AlphaTitles: function(l) {
                 return shows.filter(i => {
-                    return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                    return helpers.sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                 });
             },
             Genres: genres,
             SelectedGenre: "all",
             SanitizeStringToUrl: function(str) {
-                return sanitizeStringToUrl(str);
+                return helpers.sanitizeStringToUrl(str);
             }
         });
     });
@@ -117,7 +119,7 @@ router.get("/porady/:genre", function(req, res) {
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         show = shows.filter(function(elem) {
-            return sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl(req.params.genre);
+            return helpers.sanitizeStringToUrl(elem.genre) == helpers.sanitizeStringToUrl(req.params.genre);
         });
         if(show == null || show.length <= 0) {
             res.redirect("/porady");
@@ -129,7 +131,7 @@ router.get("/porady/:genre", function(req, res) {
                 genres.push(shows[i].genre);
             }
             genres = genres.filter(function(elem) {
-                return (sanitizeStringToUrl(elem) != sanitizeStringToUrl("Kraje")) && (sanitizeStringToUrl(elem) != sanitizeStringToUrl("Regiony"));
+                return (helpers.sanitizeStringToUrl(elem) != helpers.sanitizeStringToUrl("Kraje")) && (helpers.sanitizeStringToUrl(elem) != helpers.sanitizeStringToUrl("Regiony"));
             });
             const distinct = (value, index, self) => { return self.indexOf(value) === index; }
             genres = genres.filter(distinct).sort();
@@ -142,13 +144,13 @@ router.get("/porady/:genre", function(req, res) {
                 Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
                 AlphaTitles: function(l) {
                     return show.filter(i => {
-                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                        return helpers.sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                     });
                 },
                 Genres: genres,
                 SelectedGenre: req.params.genre,
                 SanitizeStringToUrl: function(str) {
-                    return sanitizeStringToUrl(str);
+                    return helpers.sanitizeStringToUrl(str);
                 }
             });
         }
@@ -170,7 +172,7 @@ router.get("/regiony", function(req, res) {
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         shows = shows.filter(function(elem) {
-            return (sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl("Kraje")) || (sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl("Regiony"));
+            return (helpers.sanitizeStringToUrl(elem.genre) == helpers.sanitizeStringToUrl("Kraje")) || (helpers.sanitizeStringToUrl(elem.genre) == helpers.sanitizeStringToUrl("Regiony"));
         });
         // Get list of all genres from db
         var genres = [];
@@ -188,13 +190,13 @@ router.get("/regiony", function(req, res) {
             Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
             AlphaTitles: function(l) {
                 return shows.filter(i => {
-                    return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                    return helpers.sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                 });
             },
             Genres: genres,
             SelectedGenre: "all",
             SanitizeStringToUrl: function(str) {
-                return sanitizeStringToUrl(str);
+                return helpers.sanitizeStringToUrl(str);
             }
         });
     });
@@ -205,7 +207,7 @@ router.get("/regiony/:genre", function(req, res) {
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         show = shows.filter(function(elem) {
-            return sanitizeStringToUrl(elem.genre) == sanitizeStringToUrl(req.params.genre);
+            return helpers.sanitizeStringToUrl(elem.genre) == helpers.sanitizeStringToUrl(req.params.genre);
         });
         if(show == null || show.length <= 0) {
             res.redirect("/regiony");
@@ -217,7 +219,7 @@ router.get("/regiony/:genre", function(req, res) {
                 genres.push(shows[i].genre);
             }
             genres = genres.filter(function(elem) {
-                return (sanitizeStringToUrl(elem) == sanitizeStringToUrl("Kraje")) || (sanitizeStringToUrl(elem) == sanitizeStringToUrl("Regiony"));
+                return (helpers.sanitizeStringToUrl(elem) == helpers.sanitizeStringToUrl("Kraje")) || (helpers.sanitizeStringToUrl(elem) == helpers.sanitizeStringToUrl("Regiony"));
             });
             const distinct = (value, index, self) => { return self.indexOf(value) === index; }
             genres = genres.filter(distinct).sort();
@@ -230,13 +232,13 @@ router.get("/regiony/:genre", function(req, res) {
                 Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
                 AlphaTitles: function(l) {
                     return show.filter(i => {
-                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                        return helpers.sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                     });
                 },
                 Genres: genres,
                 SelectedGenre: req.params.genre,
                 SanitizeStringToUrl: function(str) {
-                    return sanitizeStringToUrl(str);
+                    return helpers.sanitizeStringToUrl(str);
                 }
             });
         }
@@ -277,12 +279,12 @@ router.get("/filmy", function(req, res) {
             SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
             ShowsList: shows,
             SanitizeStringToUrl: function(str) {
-                return sanitizeStringToUrl(str);
+                return helpers.sanitizeStringToUrl(str);
             },
             Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
             AlphaTitles: function(l) {
                 return shows.filter(i => {
-                    return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                    return helpers.sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                 });
             },
             Genres: genres,
@@ -312,7 +314,7 @@ router.get("/filmy/:genre", function(req, res) {
             for(var i=0; i<shows.length; i++) {
                 if(shows[i].genre != null || typeof shows[i].genre !== 'undefined') {
                     for(var j=0; j<shows[i].genre.length; j++) {
-                        if(sanitizeStringToUrl(shows[i].genre[j]) == sanitizeStringToUrl(req.params.genre)) {
+                        if(helpers.sanitizeStringToUrl(shows[i].genre[j]) == helpers.sanitizeStringToUrl(req.params.genre)) {
                             show.push(shows[i]);
                         }
                     }
@@ -326,12 +328,12 @@ router.get("/filmy/:genre", function(req, res) {
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 ShowsList: show,
                 SanitizeStringToUrl: function(str) {
-                    return sanitizeStringToUrl(str);
+                    return helpers.sanitizeStringToUrl(str);
                 },
                 Letters: '-ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
                 AlphaTitles: function(l) {
                     return show.filter(i => {
-                        return sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
+                        return helpers.sanitizeStringToUrl(i.title).indexOf(l.toLowerCase()) === 0;
                     });
                 },
                 Genres: genres,
@@ -346,7 +348,7 @@ router.get("/film/:showMovie", function(req, res) {
 
     db.rdb.table("shows").filter({"category":"movie"}).orderBy("title").run().then(function(shows) {
         show = shows.find(function(elem) {
-            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showMovie);
+            return helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.showMovie);
         });
         if(show == null || show.length <= 0) {
             res.redirect("/404");
@@ -368,7 +370,7 @@ router.get("/film/:showMovie", function(req, res) {
                 ShowDetails: show,
                 ShowYoutubeVideoId: (show.youtube == null ? "" : videoIdFromYtLink(show.youtube)),
                 SanitizeStringToUrl: function(str) {
-                    return sanitizeStringToUrl(str);
+                    return helpers.sanitizeStringToUrl(str);
                 }
             });
         }
@@ -431,20 +433,32 @@ router.get("/zive", function(req, res) {
                 OnAirShows: onAirShows,
                 UpcomingShows: upcomingShows,
                 SanitizeStringToUrl: function(str) {
-                    return sanitizeStringToUrl(str);
+                    return helpers.sanitizeStringToUrl(str);
                 }
             });
         });
     });
 });
 
-router.get("/zive/:event", function(req, res) {
+
+router.get("/zive/:eventTitle", function(req, res) {
+    res.redirect("/zive/" + req.params.eventTitle + "/event");
+});
+
+router.get("/zive/:eventTitle/:eventId", function(req, res) {
     saveClientLog(req);
 
     db.rdb.table("events").orderBy("eventStart").run().then(function(shows) {
         show = shows.find(function(elem) {
-            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.event);
+            if(req.params.eventId == "event") {
+                return (helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.eventTitle));
+            }
+            else {
+                return (helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.eventTitle) && elem.id == req.params.eventId);
+            }
+            
         });
+        log.log(show.title);
         if(show == null || show.length <= 0) {
             res.redirect("/404");
         }
@@ -494,12 +508,6 @@ function getYoutubeFeed(youtubeUrl) {
     return feed;
 }
 
-function sanitizeStringToUrl(str) {
-    str = str.toString();
-    str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    str = str.replace(/[^a-z0-9]/gi, '-').toLowerCase();
-    return str;
-}
 function saveClientLog(req) {
     var geo = geoip.lookup(req.headers['x-real-ip']);
     let date_ob = new Date();
@@ -532,7 +540,7 @@ function showEpisode(req, res, renderPage = "showDetail") {
 
     db.rdb.table("shows").filter({"category":"show"}).orderBy("title").run().then(function(shows) {
         show = shows.find(function(elem) {
-            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showTitle);
+            return helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.showTitle);
         });
         if(show == null || show.length <= 0) {
             res.redirect("/404");
@@ -567,7 +575,7 @@ function showEpisode(req, res, renderPage = "showDetail") {
                     // If yes, check if it exists. If yes, return it. If not return -1.
                     else {
                         var result = body.data.feed.entry.filter(function(elem) {
-                            return sanitizeStringToUrl(elem.title) == sanitizeStringToUrl(req.params.showEpisode);
+                            return helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.showEpisode);
                         });
                         if(result.length > 0) {
                             return result[0];
@@ -604,7 +612,7 @@ function showEpisode(req, res, renderPage = "showDetail") {
                             return x();
                         },
                         SanitizeStringToUrl: function(str) {
-                            return sanitizeStringToUrl(str);
+                            return helpers.sanitizeStringToUrl(str);
                         }
                     });
                 }
