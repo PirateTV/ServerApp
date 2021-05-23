@@ -139,7 +139,7 @@ router.get("/events/:eventId/delete", auth.isAuthorized, function(req, res, next
 
 router.get("/movies", auth.isAuthorized, function(req, res, next) {
     // select all user's events
-    db.rdb.table("shows").filter((req.session.type == "administrator") ? {"category":"movie"} : {"author":req.session.userId, "category":"movie"}).orderBy("eventStart").run().then(function(movies) {
+    db.rdb.table("shows").filter((req.session.type == "administrator") ? {"category":"movie"} : {"author":req.session.userId, "category":"movie"}).orderBy("title").run().then(function(movies) {
         res.render("admin_movies", {
             SubpageTitle: i18n.__('AdminMovies'),
             SubpageDescription: i18n.__('GlobalSiteDescription'),
