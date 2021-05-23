@@ -432,9 +432,9 @@ router.get("/zive", function(req, res) {
     saveClientLog(req);
 
     // select all events one day old max and onAir
-    db.rdb.table("events").filter(db.rdb.row("onAir").eq(true).and(db.rdb.row("eventStartDate").ge(db.rdb.now().sub(24*60*60)))).orderBy("eventStartDate").run().then(function(onAirShows) {
+    db.rdb.table("events").filter(db.rdb.row("onAir").eq(true).and(db.rdb.row("eventStart").ge(db.rdb.now().sub(24*60*60)))).orderBy("eventStart").run().then(function(onAirShows) {
         // select all upcoming events not onAir
-        db.rdb.table("events").filter(db.rdb.row("onAir").eq(false).and(db.rdb.row("eventStartDate").ge(db.rdb.now().sub(60*60)))).orderBy("eventStartDate").run().then(function(upcomingShows) {
+        db.rdb.table("events").filter(db.rdb.row("onAir").eq(false).and(db.rdb.row("eventStart").ge(db.rdb.now().sub(60*60)))).orderBy("eventStart").run().then(function(upcomingShows) {
             res.render("events", {
                 SubpageTitle: i18n.__('LiveStreams'),
                 SubpageDescription: i18n.__('GlobalSiteDescription'),
