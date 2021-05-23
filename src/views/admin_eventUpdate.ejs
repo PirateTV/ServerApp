@@ -32,7 +32,11 @@
                         </tr>
                         <tr>
                             <th><%= AdminDashboard.EventStart %></th>
+                            <% if(OnAirShow.eventStart != undefined) { %>
                             <td><input type="date" value="<%= OnAirShow.eventStart.toLocaleString('sv',{ year: 'numeric', month: '2-digit', day: '2-digit' }).replace(' ', 'T').split('T')[0] %>" name="eventStartDate" /><input type="time" value="<%= OnAirShow.eventStart.toLocaleString('en-US', {hour12: false}).replace(' ', 'T').split('T')[1] %>" name="eventStartTime" /></td>
+                            <% } else{ %>
+                            <td><input type="date" value="" name="eventStartDate" /><input type="time" value="" name="eventStartTime" /></td>
+                            <% } %>
                         </tr>
                         <tr>
                             <th><%= AdminDashboard.EventYoutubeUrl %></th>
