@@ -797,9 +797,11 @@ div.rightCol {
     .linkWeather, .linkMovies {
         display: none !important;
     }
+}
 
+@media all and (min-width: 680px) {
     #menu {
-        display: block;
+        display: block !important;
     }
 }
 
