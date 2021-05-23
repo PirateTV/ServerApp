@@ -81,7 +81,8 @@ module.exports.translateApplication = function translateApplication(app) {
             MovieLicense: i18n.__('MovieLicense'),
             MovieLicenseUrl: i18n.__('MovieLicenseUrl'),
             MovieUrl: i18n.__('MovieUrl'),
-            MovieGenre: i18n.__('MovieGenre')
+            MovieGenre: i18n.__('MovieGenre'),
+            MovieCaptionsUrl: i18n.__('MovieCaptionsUrl')
         },
         Author: i18n.__('Author'),
         EventPlannedStart: i18n.__('EventPlannedStart')

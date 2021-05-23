@@ -220,7 +220,8 @@ router.post("/movies/:movieId", auth.isAuthorized, function(req, res, next) {
                 "url": req.body.movieUrl,
                 "youtube": req.body.movieYoutubeUrl,
                 "video": req.body.movieVideoUrl,
-                "views": 0
+                "views": 0,
+                "captions": req.body.movieCaptionsUrl
             }).run().then(function() {
                 res.redirect("/tajemstvi/movies");
             });
@@ -238,8 +239,8 @@ router.post("/movies/:movieId", auth.isAuthorized, function(req, res, next) {
                 "title": req.body.movieTitle,
                 "url": req.body.movieUrl,
                 "youtube": req.body.movieYoutubeUrl,
-                "video": req.body.movieVideoUrl
-
+                "video": req.body.movieVideoUrl,
+                "captions": req.body.movieCaptionsUrl
             }).run().then(function() {
                 res.redirect("/tajemstvi/movies/" + req.params.movieId);
             });
