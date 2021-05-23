@@ -45,7 +45,7 @@
 	"Login": "Přihlášení",
 	"Email": "E-mail",
 	"LoginSubmit": "Přihlásit se",
-	"LoggedOutMessage": "Úspěšně odhlášeno z eJednání.",
+	"LoggedOutMessage": "Úspěšně odhlášeno.",
 	"WrongUsernameOrPassword": "Bylo zadáno špatné jméno nebo heslo.",
 	"SessionExpired": "Vašemu přihlášení vypršela platnost. Přihlašte se prosím znovu.",
 	"AccessTokenMailSubject": "Přihlásit se k administraci portálu Pirátské televize",
