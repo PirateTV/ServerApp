@@ -40,5 +40,19 @@
 	"Contact": "Kontakt",
 	"ContactContent": "e-mail: <a href=\"mailto:piratska.televize@gmail.com\">piratska.televize@gmail.com</a>",
 	"MoviesWatched": "Osm nejsledovanějších svobodných filmů",
-	"ScrollInfoText": "Pro přiblížení nebo zobrazení jiných vrstev počasí klikněte do mapy."
+	"ScrollInfoText": "Pro přiblížení nebo zobrazení jiných vrstev počasí klikněte do mapy.",
+	"NonAuthorizedAccess": "Pro zobrazení této části se musíte přihlásit.",
+	"Login": "Přihlášení k administraci portálu",
+	"Email": "E-mail",
+	"LoginSubmit": "Přihlásit se",
+	"LoggedOutMessage": "Úspěšně odhlášeno z eJednání.",
+	"WrongUsernameOrPassword": "Bylo zadáno špatné jméno nebo heslo.",
+	"SessionExpired": "Vašemu přihlášení vypršela platnost. Přihlašte se prosím znovu.",
+	"AccessTokenMailSubject": "Přihlásit se k administraci portálu Pirátské televize",
+	"AccessTokenMailTextTemplate": "Váš odkaz k přihlášení do administrace portálu Pirátské televize: %s\nPokud jste o přihlašovací odkaz nepožádal/a, pak tento e-mail prosím ignorujte.",
+	"AuthSentMessage": "Odkaz pro přihlášení byl zaslán na Váš e-mail.",
+	"AdminLiveStreams": "Správa živých přenosů",
+	"AdminLogout": "Odhlásit se",
+	"PortalAdministration": "Administrace portálu",
+	"MyLiveStreams": "Mnou plánovaná živá vysílání"
 }

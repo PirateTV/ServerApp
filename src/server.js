@@ -9,7 +9,7 @@ var bodyParser = require("body-parser");
 var http = require("http").Server(app);
 
 var router = require("./router.js");
-//ar routerEje = require("./router.eje.js");
+var routerAdmin = require("./router.admin.js");
 var helpers = require("./helpers.js");
 var log = require('./log.js');
 //var auth = require("./auth.js");
@@ -36,10 +36,16 @@ app.use(bodyParser.json());
 app.use(i18n.init);
 // Static endpoints
 app.use(express.static('static'));
+// Use Sessions for tracking logins
+app.use(session({
+  secret: process.env.SESSIONSECRET,
+  resave: true,
+  saveUninitialized: false,
+}));
 // Dynamic endpoints
 app.use("/bower_components", express.static("bower_components"));
 app.use("/", router);
-//app.use("/eje", routerEje);
+app.use("/tajemstvi", routerAdmin);
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
   res.redirect("/404");

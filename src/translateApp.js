@@ -17,6 +17,10 @@ module.exports.translateApplication = function translateApplication(app) {
             MeetingRecordings: i18n.__('MeetingRecordings'),
             Regions: i18n.__('Regions')
         },
+        MenuAdmin: {
+            LiveStreams: i18n.__('AdminLiveStreams'),
+            Logout: i18n.__('AdminLogout'),
+        },
         MostWatched: i18n.__('MostWatched'),
         MostWatchedMoviesLbl: i18n.__('MoviesWatched'),
         Newest: i18n.__('Newest'),
@@ -52,5 +56,8 @@ module.exports.translateApplication = function translateApplication(app) {
         NoOnAirEvents: i18n.__('NoOnAirEvents'),
         NoUpcomingEvents: i18n.__('NoUpcomingEvents'),
         ScrollInfoText: i18n.__('ScrollInfoText'),
+        AdminDashboard: {
+            MyLiveStreams: i18n.__('MyLiveStreams'),
+        },
     });
 }

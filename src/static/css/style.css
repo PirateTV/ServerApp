@@ -521,6 +521,24 @@ div.rightCol {
     color: var(--blue);
 }
 
+#loginContainer {
+    width: 300px;
+    padding: 20px;
+    margin: auto;
+    text-align: center;
+}
+
+#loginContainer input[type="text"] {
+    padding: 5px;
+    margin: 15px 0 15px 0;
+    width: 100%;
+}
+
+#loginContainer input[type="submit"] {
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+}
+
 .copyleft {
     display:inline-block;
     transform: rotate(180deg);
@@ -545,6 +563,18 @@ div.rightCol {
 
 .orangeBg {
     background: var(--orange);
+}
+
+.blackBg {
+    background: #333333 !important;
+}
+
+.whiteText {
+    color: #ffffff !important;
+}
+
+.whiteText a {
+    color: #ffffff !important;
 }
 
 .gray {
