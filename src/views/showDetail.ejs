@@ -37,6 +37,13 @@
                         <h2><%= Rss[i].title %></h2>
                     </a>
                 <% } %>
+
+                <% if(Rss.length > 14) { %>
+                    <a href="<%= ShowDetails.youtube %>" class="item" target="_blank">
+                        <img src="/shows/youtube-iconsbkgd-fade-1920.jpg" alt="<%= ShowMoreOnYT %>" />
+                        <h2><%= ShowMoreOnYT %></h2>
+                    </a>
+                <% } %>
             </div>
         </div>
 

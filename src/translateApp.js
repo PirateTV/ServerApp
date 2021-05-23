@@ -18,6 +18,7 @@ module.exports.translateApplication = function translateApplication(app) {
             Regions: i18n.__('Regions')
         },
         MostWatched: i18n.__('MostWatched'),
+        MostWatchedMoviesLbl: i18n.__('MoviesWatched'),
         Newest: i18n.__('Newest'),
         Alphabetical: i18n.__('Alphabetical'),
         ByGenre: i18n.__('ByGenre'),
@@ -35,11 +36,21 @@ module.exports.translateApplication = function translateApplication(app) {
             UsedSources: i18n.__('UsedSources'),
             Description: i18n.__('PortalDescription'),
             Note: i18n.__('Note'),
-            Author: i18n.__('Author')
+            Author: i18n.__('Author'),
+            ForDownload: i18n.__('ForDownload'),
+            Contact: i18n.__('Contact'),
+            ContactContent: i18n.__('ContactContent')
         },
         ReadMore: i18n.__('ReadMore'),
         SourceLink: i18n.__('SourceLink'),
         Published: i18n.__('Published'),
-        MoviesDescription: i18n.__('MoviesDescription')
+        MoviesDescription: i18n.__('MoviesDescription'),
+        ShowMoreOnYT: i18n.__('ShowMoreOnYT'),
+        EventStart: i18n.__('EventStart'),
+        OnAirEvents: i18n.__('OnAirEvents'),
+        UpcomingEvents: i18n.__('UpcomingEvents'),
+        NoOnAirEvents: i18n.__('NoOnAirEvents'),
+        NoUpcomingEvents: i18n.__('NoUpcomingEvents'),
+        ScrollInfoText: i18n.__('ScrollInfoText'),
     });
 }

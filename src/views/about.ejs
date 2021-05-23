@@ -23,24 +23,30 @@
                 <%- About.Author %>
             </p>
 
-            <h2><%= About.UsedSources %></h2>
-            <p>
-                <ul>
-                    <% for(let i = 0; i < Feeds.length; i++) { %>
-                    <li><%= Feeds[i][0] %> | <a href="<%= Feeds[i][1] %>" class="item"><%= Feeds[i][1] %></a></li>
-                    <% } %>    
-                </ul>
-            </p>
+            <!--<h2><%= About.Contact %></h2>
+            <p id="contact">
+                <%- About.ContactContent %>
+            </p>-->
 
-            <h2><%= About.FreeComponents %></h2>
-            <p>
-                <ul>
-                    <li><a href="https://plyr.io/">Plyr HTML5 video player</a></li>
-                    <li><a href="https://www.subtlepatterns.com">SubtlePatterns - Background patterns</a></li>
-                    <li><a href="https://www.flaticon.com/">Social network icons</a></li>
-                    <li><a href="https://github.com/PiratskaTelevize/ServerApp">Portal application source code</a></li>
-                </ul>
-            </p>
+            <h2><!--<a href="javascript:hideShow('forDownload')">--><%= About.ForDownload %><!--</a>--></h2>
+            <ul id="forDownload">
+                <li><a href="https://obsproject.com/cs/download">OBS Studio (doporučený streamovací software)</a></li>
+                <li><a href="https://github.com/PiratskaTelevize/grafika">Grafické podklady</a></li>
+            </ul>
+
+            <h2><!--<a href="javascript:hideShow('usedSources')">--><%= About.UsedSources %><!--</a>--></h2>
+            <ul id="usedSources">
+                <% for(let i = 0; i < Feeds.length; i++) { %>
+                <li><%= Feeds[i][0] %> | <a href="<%= Feeds[i][1] %>" class="item"><%= Feeds[i][1] %></a></li>
+                <% } %>    
+            </ul>
+
+            <h2><!--<a href="javascript:hideShow('freeComponents')">--><%= About.FreeComponents %><!--</a>--></h2>
+            <ul id="freeComponents">
+                <li><a href="https://plyr.io/">Plyr HTML5 video player</a></li>
+                <li><a href="https://www.subtlepatterns.com">SubtlePatterns - Background patterns</a></li>
+                <li><a href="https://www.flaticon.com/">Social network icons</a></li>
+            </ul>
         </div>
     </div>
     
