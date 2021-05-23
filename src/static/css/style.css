@@ -797,6 +797,10 @@ div.rightCol {
     .linkWeather, .linkMovies {
         display: none !important;
     }
+
+    #menu {
+        display: block;
+    }
 }
 
 @media all and (max-width: 680px) {
@@ -862,6 +866,10 @@ div.rightCol {
     #topics .item {
         width: auto;
         margin: 0.5em 1em 0.5em 1em;
+    }
+    
+    #menu .whiteText {
+        color: #000000 !important;
     }
 }
 
