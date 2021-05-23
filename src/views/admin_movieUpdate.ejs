@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/headAdmin %>
+</head>
+
+<body>
+    <% include partials/headerAdmin %>
+
+    <div id="adminDashboard">
+        <div class="title purpleBg">
+            <div class="content">
+                <h1 class="whiteText"><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="shows">
+            <div class="content">
+                <h2><%= EventAction %></h2>
+                <form method="POST" action="#">
+                    <table id="myEvents" class="purpleBg">
+                        <tr>
+                            <th><%= AdminDashboard.MovieTitle %></th>
+                            <td><input type="text" value="<%= Movie.title %>" id="eventTitle" name="movieTitle" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.EventCoverUrl %></th>
+                            <td>
+                                <img id="coverUrlImg" src="<%= Movie.cover %>" alt="<%= Movie.title %>" />
+                                <input type="text" value="<%= Movie.cover %>" id="coverUrl" name="movieCoverUrl" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.EventYoutubeUrl %></th>
+                            <td><input type="text" value="<%= Movie.youtube %>" name="movieYoutubeUrl" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.MovieVideoUrl %></th>
+                            <td><input type="text" value="<%= Movie.video %>" name="movieVideoUrl" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.MovieDescription %></th>
+                            <td><input type="text" value="<%= Movie.description %>" name="movieDescription" /></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>
+
+                                <input type="text" id="movieGenre" value="<%= Movie.genre %>" name="movieGenre" />
+                                <script>
+                                    $('#movieGenre').selectize({
+                                        delimiter: ',',
+                                        persist: false,
+                                        createOnBlur: false,
+                                        create: true,
+                                        maxItems: 10
+                                    });
+                                    var selectize_tags = $("#movieGenre")[0].selectize
+                                </script>
+
+                                <% for(let i = 0; i < Genres.length; i++) { %>
+                                <script>
+                                    selectize_tags.addOption({
+                                        text:'<%= Genres[i] %>',
+                                        value: '<%= Genres[i] %>'
+                                    });
+                                </script>
+                                <% } %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.MovieAuthor %></th>
+                            <td><input type="text" value="<%= Movie.author %>" name="movieAuthor" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.MovieAuthorUrl %></th>
+                            <td><input type="text" value="<%= Movie.authorUrl %>" name="movieAuthorUrl" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.MovieLicense %></th>
+                            <td><input type="text" value="<%= Movie.license %>" name="movieLicense" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.MovieLicenseUrl %></th>
+                            <td><input type="text" value="<%= Movie.licenseUrl %>" name="movieLicenseUrl" /></td>
+                        </tr>
+                        <tr>
+                            <th><%= AdminDashboard.MovieUrl %></th>
+                            <td><input type="text" value="<%= Movie.url %>" name="movieUrl" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" value="<%= EventAction %>" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>
+
+    <script type="text/javascript">
+    $(document).ready( function () {
+        $('#coverUrl').on("input", function() {
+            $('#coverUrlImg').attr('src', $('#coverUrl').val());
+        });
+
+        $('#eventTitle').on("input", function() {
+            $('#coverUrlImg').attr('alt', $('#eventTitle').val());
+        });
+    } );
+    </script>
+</body>
+</html>

@@ -11,7 +11,11 @@
             <a href="/o-nas"><%= Menu.About %></a>-->
             <a href="/tajemstvi/events" class="linkStreams whiteText"><%= MenuAdmin.LiveStreams %></a>
             <a href="/tajemstvi/movies" class="linkMovies whiteText"><%= MenuAdmin.Movies %></a>
+            <% if(LoggedUser == "") { %>
             <a href="/tajemstvi/logout" class="whiteText"><%= MenuAdmin.Logout %></a>
+            <% } else{ %>
+            <a href="/tajemstvi/logout" class="whiteText"><%= MenuAdmin.Logout %> (<%= LoggedUser %>)</a>
+            <% } %>
         </div>
         <div class="rightCol mobile whiteText" onclick="javascript: hideShow('menu'); hideShow('mobileMenuUnder');">
             <a href="#">☰</a>

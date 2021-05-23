@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/headAdmin %>
+</head>
+
+<body>
+    <% include partials/headerAdmin %>
+
+    <div id="adminDashboard">
+        <div class="title purpleBg">
+            <div class="content">
+                <h1 class="whiteText"><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="shows">
+            <div class="content">
+                <input type="button" value="<%= AdminDashboard.MovieCreateNew %>" onclick="location.href='<%= SubpageUrl %>/createNew'" id="eventCreateNew" />
+                <h2><%= AdminDashboard.MyMovies %></h2>
+
+                <table id="myEvents" class="purpleBg">
+                    <thead>
+                        <tr>
+                            <th><%= AdminDashboard.EventTitle %></th>
+                            <th><%= AdminDashboard.EventCoverUrl %></th>
+                            <th><%= AdminDashboard.EventUpdate %></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% for(let i = 0; i < Movies.length; i++) { %>
+                        <form method="POST" action="#">
+                            <tr>
+                                <td class="longCol"><%= Movies[i].title %></td>
+                                <td class="longCol">
+                                    <img src="<%= Movies[i].cover %>" alt="<%= Movies[i].title %>" />
+                                </td>
+                                <td class="smallCol">
+                                    <input type="button" value="<%= AdminDashboard.EventUpdate %>" onclick="location.href='<%= SubpageUrl %>/<%= Movies[i].id %>'" /><br />
+                                    <input type="button" value="<%= AdminDashboard.EventDelete %>" onclick="javascript:deleteEventTrigger('<%= Movies[i].id %>', '<%= Movies[i].title %>')" />
+                                </td>
+                            </tr>
+                        </form>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>
+
+    <script type="text/javascript">
+    $(document).ready( function () {
+        $('#myEvents').DataTable( {
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            "order": [[ 1, "asc" ]],
+            stateSave: true
+        } );
+    } );
+
+    function deleteEventTrigger(eventId, eventTitle) {
+        if (confirm('<%= AdminDashboard.MovieDeleteConfirmation %>\n' + eventTitle)) {
+            // Save it!
+            location.href='<%= SubpageUrl %>/' + eventId + '/delete';
+        }
+    }
+    </script>
+</body>
+</html>

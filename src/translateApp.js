@@ -69,7 +69,18 @@ module.exports.translateApplication = function translateApplication(app) {
             EventDelete: i18n.__('EventDelete'),
             EventDeleteConfirmation: i18n.__('EventDeleteConfirmation'),
             EventEdit: i18n.__('EventEdit'),
-            EventCreateNew: i18n.__('EventCreateNew')
+            EventCreateNew: i18n.__('EventCreateNew'),
+            MovieVideoUrl: i18n.__('MovieVideoUrl'),
+            MovieDescription: i18n.__('MovieDescription'),
+            MovieCreateNew: i18n.__('MovieCreateNew'),
+            MovieDeleteConfirmation: i18n.__('MovieDeleteConfirmation'),
+            MyMovies: i18n.__('MyMovies'),
+            MovieTitle: i18n.__('MovieTitle'),
+            MovieAuthor: i18n.__('MovieAuthor'),
+            MovieAuthorUrl: i18n.__('MovieAuthorUrl'),
+            MovieLicense: i18n.__('MovieLicense'),
+            MovieLicenseUrl: i18n.__('MovieLicenseUrl'),
+            MovieUrl: i18n.__('MovieUrl')
         },
         Author: i18n.__('Author'),
         EventPlannedStart: i18n.__('EventPlannedStart')

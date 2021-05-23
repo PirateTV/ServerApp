@@ -543,6 +543,10 @@ div.rightCol {
     border:           solid 1px var(--red);
     font-weight:      300;
 }
+
+#myEvents.purpleBg {
+    border: solid 1px var(--purple);
+}
   
 #myEvents th {
     padding:          0.2em;
@@ -553,6 +557,10 @@ div.rightCol {
     transition:       all ease-in-out 0.5s;
     font-weight:      400;
     font-size:        11pt;
+}
+
+#myEvents.purpleBg th {
+    background-color: var(--purple);
 }
 
 #myEvents th.sorting_desc, #myEvents th.sorting_asc {
@@ -590,10 +598,11 @@ div.rightCol {
 
 #myEvents tbody tr {
     transition:       all ease-in-out 0.5s;
+    background:       #ffffff;
 }
 
 #myEvents tr:nth-child(2n+2) {
-    background:       #d2effc;
+    background:       #d2effc !important;
 }
 
 #myEvents tbody tr:hover {

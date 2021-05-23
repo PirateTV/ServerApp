@@ -66,5 +66,17 @@
 	"EventCreateNew": "Naplánovat nový přenos",
 	"EventEdit": "Upravit stávající přenos",
 	"AdminMovies": "Správa svobodných filmů",
-	"EventPlannedStart": "Zahájení přenosu naplánováno na: "
+	"EventPlannedStart": "Zahájení přenosu naplánováno na: ",
+	"MovieVideoUrl": "Video URL",
+	"MovieDescription": "Popis",
+	"MovieCreateNew": "Přidat nový film",
+	"MovieDeleteConfirmation": "Opravdu chcete odstranit tento film?",
+	"MyMovies": "Moje filmy",
+	"MovieTitle": "Název filmu",
+	"MovieEdit": "Upravit film",
+	"MovieAuthor": "Autor filmu",
+	"MovieAuthorUrl": "Webová stránka autora",
+	"MovieLicense": "Licence",
+	"MovieLicenseUrl": "Odkaz na licenci",
+	"MovieUrl": "Webová stránka filmu"
 }
