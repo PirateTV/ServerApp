@@ -78,5 +78,6 @@
 	"MovieAuthorUrl": "Webová stránka autora",
 	"MovieLicense": "Licence",
 	"MovieLicenseUrl": "Odkaz na licenci",
-	"MovieUrl": "Webová stránka filmu"
+	"MovieUrl": "Webová stránka filmu",
+	"MovieGenre": "Žánr filmu"
 }
