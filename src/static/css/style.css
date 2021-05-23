@@ -619,6 +619,10 @@ div.rightCol {
     cursor: pointer;
 }
 
+#coverUrlImg {
+    max-width: 350px;
+}
+
 .copyleft {
     display:inline-block;
     transform: rotate(180deg);
