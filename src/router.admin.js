@@ -92,8 +92,7 @@ router.get("/events/:eventId", auth.isAuthorized, function(req, res, next) {
 router.post("/events/:eventId", auth.isAuthorized, function(req, res, next) {
     if (
         req.body.eventTitle != "" &&
-        req.body.eventStart != "" &&
-        req.body.eventYoutubeUrl != ""
+        req.body.eventStart != ""
     ) {
         if(req.params.eventId == "createNew") {
             // select event by Id and check if it belongs to the author
