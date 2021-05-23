@@ -92,14 +92,15 @@ router.get("/events/:eventId", auth.isAuthorized, function(req, res, next) {
 router.post("/events/:eventId", auth.isAuthorized, function(req, res, next) {
     if (
         req.body.eventTitle != "" &&
-        req.body.eventStart != ""
+        req.body.eventStartDate != "" &&
+        req.body.eventStartTime != ""
     ) {
         if(req.params.eventId == "createNew") {
             // select event by Id and check if it belongs to the author
             db.rdb.table("events").insert({
                 "title":req.body.eventTitle,
                 "cover":req.body.eventCoverUrl,
-                "eventStart":req.body.eventStart,
+                "eventStart":new Date(req.body.eventStartDate + " " + req.body.eventStartTime),
                 "youtube":req.body.eventYoutubeUrl,
                 "slido":req.body.eventSlidoUrl,
                 "onAir":(req.body.eventOnAir == "checked" ? true : false),
@@ -113,7 +114,7 @@ router.post("/events/:eventId", auth.isAuthorized, function(req, res, next) {
             db.rdb.table("events").filter((req.session.type == "administrator") ? {"id":req.params.eventId} : {"id":req.params.eventId, "author":req.session.userId}).update({
                 "title":req.body.eventTitle,
                 "cover":req.body.eventCoverUrl,
-                "eventStart":req.body.eventStart,
+                "eventStart":new Date(req.body.eventStartDate + " " + req.body.eventStartTime),
                 "youtube":req.body.eventYoutubeUrl,
                 "slido":req.body.eventSlidoUrl,
                 "onAir":(req.body.eventOnAir == "checked" ? true : false),

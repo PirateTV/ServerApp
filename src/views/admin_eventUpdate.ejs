@@ -32,7 +32,7 @@
                         </tr>
                         <tr>
                             <th><%= AdminDashboard.EventStart %></th>
-                            <td><input type="datetime-local" value="<%= OnAirShow.eventStart %>" name="eventStart" /></td>
+                            <td><input type="date" value="<%= OnAirShow.eventStart.toLocaleString('sv').replace(' ', 'T').split('T')[0] %>" name="eventStartDate" /><input type="time" value="<%= OnAirShow.eventStart.toLocaleString('sv').replace(' ', 'T').split('T')[1] %>" name="eventStartTime" /></td>
                         </tr>
                         <tr>
                             <th><%= AdminDashboard.EventYoutubeUrl %></th>

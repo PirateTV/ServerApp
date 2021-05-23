@@ -432,9 +432,9 @@ router.get("/zive", function(req, res) {
     saveClientLog(req);
 
     // select all events one day old max and onAir
-    db.rdb.table("events").filter(db.rdb.row("onAir").eq(true).and(db.rdb.row("eventStart").ge(db.rdb.now().sub(24*60*60)))).orderBy("eventStart").run().then(function(onAirShows) {
+    db.rdb.table("events").filter(db.rdb.row("onAir").eq(true).and(db.rdb.row("eventStartDate").ge(db.rdb.now().sub(24*60*60)))).orderBy("eventStartDate").run().then(function(onAirShows) {
         // select all upcoming events not onAir
-        db.rdb.table("events").filter(db.rdb.row("onAir").eq(false).and(db.rdb.row("eventStart").ge(db.rdb.now().sub(60*60)))).orderBy("eventStart").run().then(function(upcomingShows) {
+        db.rdb.table("events").filter(db.rdb.row("onAir").eq(false).and(db.rdb.row("eventStartDate").ge(db.rdb.now().sub(60*60)))).orderBy("eventStartDate").run().then(function(upcomingShows) {
             res.render("events", {
                 SubpageTitle: i18n.__('LiveStreams'),
                 SubpageDescription: i18n.__('GlobalSiteDescription'),
@@ -458,7 +458,7 @@ router.get("/zive/:eventTitle", function(req, res) {
 router.get("/zive/:eventTitle/:eventId", function(req, res) {
     saveClientLog(req);
 
-    db.rdb.table("events").orderBy("eventStart").run().then(function(shows) {
+    db.rdb.table("events").orderBy("eventStartDate").run().then(function(shows) {
         show = shows.find(function(elem) {
             if(req.params.eventId == "event") {
                 return (helpers.sanitizeStringToUrl(elem.title) == helpers.sanitizeStringToUrl(req.params.eventTitle));
@@ -468,7 +468,6 @@ router.get("/zive/:eventTitle/:eventId", function(req, res) {
             }
             
         });
-        log.log(show.title);
         if(show == null || show.length <= 0) {
             res.redirect("/404");
         }
@@ -480,7 +479,6 @@ router.get("/zive/:eventTitle/:eventId", function(req, res) {
             db.rdb.table("events").get(show.id).update({"views": views}).run();
 
             db.rdb.table("users").get(show.author).run().then(function(author) {
-                log.log(author.fullname);
                 res.render("eventDetail", {
                     SubpageTitle: show.title,
                     SubpageDescription: i18n.__('GlobalSiteDescription'),
