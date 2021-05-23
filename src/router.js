@@ -378,7 +378,7 @@ router.get("/film/:showMovie/:movieId", function(req, res) {
                 SubpageCover: show.cover,
                 SubpageUrl: req.protocol + '://' + req.get('host') + req.originalUrl,
                 ShowDetails: show,
-                ShowYoutubeVideoId: (show.youtube == null ? "" : videoIdFromYtLink(show.youtube)),
+                ShowYoutubeVideoId: ((show.youtube == null || show.youtube == "") ? "" : videoIdFromYtLink(show.youtube)),
                 SanitizeStringToUrl: function(str) {
                     return helpers.sanitizeStringToUrl(str);
                 }
