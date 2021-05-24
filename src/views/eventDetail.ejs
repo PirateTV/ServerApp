@@ -27,7 +27,7 @@
         </div>
         <div id="showDescription" class="eventAuthor">
             <%= Author %><a href="mailto:<%= EventAuthor.email %>"><%= EventAuthor.fullname %></a><br />
-            <%= EventPlannedStart %><%= ShowDetails.eventStart %>
+            <%= EventPlannedStart %><%= (ShowDetails.eventStart).toLocaleString('sv') %>
         </div>
 
         <script type="text/javascript">

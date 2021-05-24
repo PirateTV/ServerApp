@@ -24,7 +24,7 @@
                     <a href="/zive/<%= SanitizeStringToUrl(OnAirShows[i].title) %>/<%= OnAirShows[i].id %>" class="item redUnderline">
                         <img src="<%= OnAirShows[i].cover %>" alt="<%= OnAirShows[i].title %>" />
                         <h2><%= OnAirShows[i].title %></h2>
-                        <span class="author"><%= EventStart %>&nbsp;<%= OnAirShows[i].eventStart %></span>
+                        <span class="author"><%= EventStart %>&nbsp;<%= (OnAirShows[i].eventStart).toLocaleString('sv') %></span>
                     </a>
                 <% } %>
 
@@ -36,7 +36,7 @@
                     <a href="/zive/<%= SanitizeStringToUrl(UpcomingShows[i].title) %>/<%= UpcomingShows[i].id %>" class="item redUnderline">
                         <img src="<%= UpcomingShows[i].cover %>" alt="<%= UpcomingShows[i].title %>" />
                         <h2><%= UpcomingShows[i].title %></h2>
-                        <span class="author"><%= EventStart %>&nbsp;<%= UpcomingShows[i].eventStart %></span>
+                        <span class="author"><%= EventStart %>&nbsp;<%= (UpcomingShows[i].eventStart).toLocaleString('sv') %></span>
                     </a>
                 <% } %>
             </div>

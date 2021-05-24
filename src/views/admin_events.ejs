@@ -39,7 +39,7 @@
                                 <td class="longCol">
                                     <img src="<%= OnAirShows[i].cover %>" alt="<%= OnAirShows[i].title %>" />
                                 </td>
-                                <td class="longCol"><%= OnAirShows[i].eventStart %></td>
+                                <td class="longCol"><%= (OnAirShows[i].eventStart).toLocaleString('sv') %></td>
                                 <td class="smallCol"><%= OnAirShows[i].youtube %></td>
                                 <td class="smallCol"><%= OnAirShows[i].slido %></td>
                                 <% if(OnAirShows[i].onAir === true) { %>
@@ -65,8 +65,8 @@
     <script type="text/javascript">
     $(document).ready( function () {
         $('#myEvents').DataTable( {
-            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-            "order": [[ 1, "asc" ]],
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "všechny"]],
+            "order": [[ 0, "asc" ]],
             stateSave: true
         } );
     } );

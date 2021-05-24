@@ -22,8 +22,10 @@
                 <table id="myEvents" class="purpleBg">
                     <thead>
                         <tr>
-                            <th><%= AdminDashboard.EventTitle %></th>
+                            <th><%= AdminDashboard.MovieTitle %></th>
+                            <th><%= AdminDashboard.MovieAuthor %></th>
                             <th><%= AdminDashboard.EventCoverUrl %></th>
+                            <th><%= AdminDashboard.MovieLicense %></th>
                             <th><%= AdminDashboard.EventUpdate %></th>
                         </tr>
                     </thead>
@@ -32,9 +34,11 @@
                         <form method="POST" action="#">
                             <tr>
                                 <td class="longCol"><%= Movies[i].title %></td>
+                                <td class="longCol"><%= Movies[i].author %></td>
                                 <td class="longCol">
                                     <img src="<%= Movies[i].cover %>" alt="<%= Movies[i].title %>" />
                                 </td>
+                                <td class="longCol"><%= Movies[i].license %></td>
                                 <td class="smallCol">
                                     <input type="button" value="<%= AdminDashboard.EventUpdate %>" onclick="location.href='<%= SubpageUrl %>/<%= Movies[i].id %>'" /><br />
                                     <input type="button" value="<%= AdminDashboard.EventDelete %>" onclick="javascript:deleteEventTrigger('<%= Movies[i].id %>', '<%= Movies[i].title %>')" />
@@ -53,8 +57,8 @@
     <script type="text/javascript">
     $(document).ready( function () {
         $('#myEvents').DataTable( {
-            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-            "order": [[ 1, "asc" ]],
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "všechny"]],
+            "order": [[ 0, "asc" ]],
             stateSave: true
         } );
     } );
