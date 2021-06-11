@@ -36,7 +36,7 @@ module.exports.translateApplication = function translateApplication(app) {
             UsedSources: i18n.__('UsedSources'),
             Description: i18n.__('PortalDescription'),
             Note: i18n.__('Note'),
-            Author: i18n.__('Author'),
+            Author: i18n.__('WebAuthor'),
             ForDownload: i18n.__('ForDownload'),
             Contact: i18n.__('Contact'),
             ContactContent: i18n.__('ContactContent')

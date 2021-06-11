@@ -80,5 +80,6 @@
 	"MovieLicenseUrl": "Odkaz na licenci",
 	"MovieUrl": "Webová stránka filmu",
 	"MovieGenre": "Žánr filmu",
-	"MovieCaptionsUrl": "Titulky k filmu (odkaz)"
+	"MovieCaptionsUrl": "Titulky k filmu (odkaz)",
+	"WebAuthor": "Autorem projektu je <a href=\"https://krtkovo.eu\">Ondřej Kotas</a>.<br />Dílo je zveřejněno pod licencí <a href=\"https://github.com/PirateTV/ServerApp/blob/master/LICENSE.md\">GNU General Public License v3.0</a>.",
 }
