@@ -7,7 +7,7 @@
 <body>
     <% include partials/header %>
 
-    <div id="listOfShows">
+    <!--<div id="listOfShows">
         <div class="title blueBg">
             <div class="content">
                 <h1><%= MostWatched %></h1>
@@ -24,10 +24,10 @@
                 <% } %>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!-- RSS reader from piratskelisty.cz -->
-    <div id="topics">
+    <!--<div id="topics">
         <div class="title">
             <div class="content">
                 <h1><a href="https://www.piratskelisty.cz/"><%= Topics %></a></h1>
@@ -40,7 +40,7 @@
                 <a href="<%= RssTopics[i].link %>">
                 <div class="item">
                     <h1><%= RssTopics[i].title %></h1>
-                    <!--<img src="<%= RssTopics[i].image %>" alt="<%= RssTopics[i].title %>" />-->
+                    <img src="<%= RssTopics[i].image %>" alt="<%= RssTopics[i].title %>" />
                     <p><%- RssTopics[i].description %></p>
                     <p class="readMore"><%= ReadMore %></p>
                     <span><%= RssTopics[i].category %></span>
@@ -49,7 +49,7 @@
             <% } %>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div id="listOfMovies">
         <div class="title purpleBg">
