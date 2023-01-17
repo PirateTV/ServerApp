@@ -1,0 +1,88 @@
+/* 
+    Teletext stylesheet 
+    Galax 2014-2015 http://galax.xyz
+    
+    MODE7GX3.TTF font by Galax 2014 - based on ModeSeven, created in 1998 by Andrew Bulhak
+*/
+
+/* 
+    Teletext palette 
+    000000 0 black
+    ff0000 1 red
+    00ff00 2 green
+    ffff00 3 yellow
+    0000ff 4 blue
+    ff00ff 5 magenta
+    00ffff 6 cyan
+    ffffff 7 white
+*/
+
+
+#teletextContainer a {
+    text-decoration: none;
+}
+
+/* unvisited link */
+#teletextContainer a:link {
+    color: #00ffff;
+}
+
+/* visited link */
+#teletextContainer a:visited {
+    color: #00ff00;
+}
+
+/* mouse over link */
+#teletextContainer a:hover {
+    color: #ffff00;
+}
+#teletextContainer a.yellow:hover, #teletextContainer .yellow a:hover {
+    color: #00ff00;
+}
+
+/* selected link */
+#teletextContainer a:active {
+    color: #ff0000;
+}
+#teletextContainer a.yellow:active, #teletextContainer .yellow a:active {
+    color: #ff0000;
+}
+#teletextContainer a.red:active, #teletextContainer .red a:active {
+    color: #ffff00;
+}
+
+/* flashing class, it's like the 'blink' tag is back */
+#teletextContainer .flashing {
+    animation: flashing 1s infinite alternate; 
+    -webkit-animation: flashing 1s infinite alternate;
+}
+@keyframes flashing { to { color: white; } }
+@-webkit-keyframes flashing { to { color: white; } }
+
+/* concealed text is initially hidden, reveal by modifying class */
+.conceal { opacity: 0; }
+
+.colour0, .black,   a.black,   .black a    {color: #000000;}
+.colour1, .red,     a.red,     .red  a       {color: #ff0000;}
+.colour2, .green,   a.green,   .green  a   {color: #00ff00;}
+.colour3, .yellow,  a.yellow,  .yellow a  {color: #ffff00;}
+.colour4, .blue,    a.blue,    .blue a      {color: #0000ff;}
+.colour5, .magenta, a.magenta, .magenta a{color: #ff00ff;}
+.colour6, .cyan,    a.cyan,    .cyan  a     {color: #00ffff;}
+.colour7, .white,   a.white,   .white  a   {color: #ffffff;}
+.grey { color: lightslategrey; }
+.orange { color: orange; }
+
+.colour0bg, .blackbg     {background-color: #000000;}
+.colour1bg, .redbg         {background-color: #ff0000;}
+.colour2bg, .greenbg     {background-color: #00ff00;}
+.colour3bg, .yellowbg   {background-color: #ffff00;}
+.colour4bg, .bluebg       {background-color: #0000ff;}
+.colour5bg, .magentabg {background-color: #ff00ff;}
+.colour6bg, .cyanbg       {background-color: #00ffff;}
+.colour7bg, .whitebg     {background-color: #ffffff;}
+
+@font-face {
+    font-family: Mode7;
+    src: url('/fonts/MODE7GX3.TTF')/*, url('MODE7GX3.EOT');   .EOT is for IE */
+}

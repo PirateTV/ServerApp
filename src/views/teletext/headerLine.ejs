@@ -1,0 +1,18 @@
+P<%= TeletextPageNumber %>&nbsp;<span class="cyan">TELETEXT</span>&nbsp;<span class="grey"><%= TeletextSubpageNumber %></span>&nbsp;<span class="grey"><%= TeletextPageNumber %></span>&nbsp;<span id="dateSpan" class="orange"></span>&nbsp;<span id="timeSpan"></span>
+
+<script type="text/javascript">
+    var timeSpan = document.getElementById('timeSpan');
+    var dateSpan = document.getElementById('dateSpan');
+    function time() {
+        var d = new Date();
+        var s = d.getSeconds();
+        var m = d.getMinutes();
+        var h = d.getHours();
+        timeSpan.textContent = 
+            ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ((s%2)?":":'\xa0') + ("0" + s).substr(-2);
+        dateSpan.textContent = d.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'});
+    }
+    time();
+
+    setInterval(time, 1000);
+</script>

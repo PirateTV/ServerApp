@@ -10,6 +10,7 @@ var http = require("http").Server(app);
 
 var router = require("./router.js");
 var routerAdmin = require("./router.admin.js");
+var routerTeletext = require("./router.teletext.js");
 var helpers = require("./helpers.js");
 var log = require('./log.js');
 //var auth = require("./auth.js");
@@ -45,6 +46,7 @@ app.use(session({
 // Dynamic endpoints
 app.use("/bower_components", express.static("bower_components"));
 app.use("/", router);
+app.use("/teletext", routerTeletext);
 app.use("/tajemstvi", routerAdmin);
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){

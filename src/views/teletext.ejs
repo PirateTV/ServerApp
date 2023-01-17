@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <% include partials/header %>
+
+    <div id="teletext">
+        <div class="title blackBg">
+            <div class="content">
+                <h1><%= SubpageTitle %></h1>
+            </div>
+        </div>
+
+        <div class="teletextFrame">
+            <iframe src="https://www.nathanmediaservices.co.uk/teletext-viewer/?noUI=1&c=4&p=100" frameborder="0"></iframe>
+            <div id="teletextContainer">
+                <!--<div><% include teletext/headerLine %></div>
+                <div><span class="magenta"></span><span class=""></span></div>
+                <div><span class="magenta"></span></div>
+                <div><span class="magenta"></span></div>
+                <div><span class="magenta"></span></div>
+                <div> Impressum</div>
+                <div></div>
+                <div>l</div>
+                <div>lk</div>
+                <div>l</div>
+                <div>l</div>
+                <div></div>
+                <div>llll</div>
+                <div>llll</div>
+                <div></div>
+                <div>l</div>
+                <div>l</div>
+                <div>l</div>
+                <div>l</div>
+                <div></div>
+                <div>lllll</div>
+                <div></div>
+                <div>l</div>
+                <div></div>
+                <div>Strana&nbsp;<%= TeletextPageNumber %></div>
+                -->
+            </div>
+        </div>
+
+        <div id="teletextControls">
+
+        </div>
+    </div>
+
+    <% include partials/footer %>
+</body>
+</html>

@@ -15,7 +15,8 @@ module.exports.translateApplication = function translateApplication(app) {
             Weather: i18n.__('Weather'),
             About: i18n.__('About'),
             MeetingRecordings: i18n.__('MeetingRecordings'),
-            Regions: i18n.__('Regions')
+            Regions: i18n.__('Regions'),
+            Teletext: i18n.__('Teletext')
         },
         MostWatched: i18n.__('MostWatched'),
         MostWatchedMoviesLbl: i18n.__('MoviesWatched'),
